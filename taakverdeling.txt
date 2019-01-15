@@ -1,0 +1,17 @@
+controllers:
+    - inloggen/uitloggen: Jill
+    - Registreren:  Jill
+    - Receptopzoeken: Miro
+        - receptbekijken: Miro
+    - mypage: Talia
+        - saved_recipes: Talia
+
+HTML/CSS:
+    - Login/Register: Gizmo
+    - Homepage: Miro
+    - Mypage: Talia
+        - saved_Recipes: Talia
+
+Inlog Edamam
+e-mailadres: talia_fawzy@hotmail.com
+wachtwoord: WebIK2019
