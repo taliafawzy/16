@@ -52,6 +52,14 @@ def personaltried():
     #sum all tried recipes
     db.execute("SELECT tried, SUM(tried) AS tried, tried FROM portfolio WHERE UserID = :id",  id=session["user_id"])
 
+@app.route("/tried", methods=["GET", "POST"])
+def alltried():
+
+    # insert into database if recipe clicked "rated"
+    db.execute("INSERT INTO cookbook (tried) VALUES (:tried)")
+
+    #select top 2 tried recipes
+    bestTwo = db.execute("SELECT TOP 2 * FROM tried, tried FROM cookbook WHERE ingredient = request.form.get("ingredient"))
 
 
 @app.route("/rated", methods=["GET", "POST"])
@@ -64,6 +72,16 @@ def personalrated():
     db.execute("SELECT rated, SUM(rated) AS rated, rated FROM portfolio WHERE UserID = :id",  id=session["user_id"])
 
 
+@app.route("/rated", methods=["GET", "POST"])
+def allrated():
+
+    # insert into database if recipe clicked "rated"
+    db.execute("INSERT INTO cookbook (rated) VALUES (:rated)")
+
+    #average all rated recipes
+    averageRated = db.execute("SELECT * FROM rated, SELECT AVG(rated))
+
+
 
 @app.route("/saved", methods=["GET", "POST"])
 def personalsaved():
@@ -73,5 +91,4 @@ def personalsaved():
 
     #sum all saved recipes
     db.execute("SELECT saved, SUM(saved) AS saved, saved FROM portfolio WHERE UserID = :id",  id=session["user_id"])
-
 
