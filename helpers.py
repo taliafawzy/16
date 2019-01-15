@@ -52,6 +52,14 @@ def personaltried():
     #sum all tried recipes
     db.execute("SELECT tried, SUM(tried) AS tried, tried FROM portfolio WHERE UserID = :id",  id=session["user_id"])
 
+@app.route("/rated", methods=["GET", "POST"])
+def allrated():
+
+    # insert into database if recipe clicked "rated"
+    db.execute("INSERT INTO cookbook (rated) VALUES (:rated)")
+
+    #average all rated recipes
+    db.execute("SELECT AVG(rated)")
 
 
 @app.route("/rated", methods=["GET", "POST"])
