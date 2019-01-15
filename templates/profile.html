@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block main %}
+
+
+<table class="table table-striped">
+    <tr>
+        <th>Username</th>
+        <td>{{portfolio.username}}</td>
+    </tr>
+    <tr>
+        <th>Recipes tried</th>
+        <td>{{portfolio.tried}}</td>
+    </tr>
+    <tr>
+        <th>Recipes rated</th>
+        <td>{{portfolio.rated}}</td>
+    </tr>
+    <tr>
+        <th>Recipes saved</th>
+        <td>{{portfolio.saved}}</td>
+    </tr>
+
+</table>
+{% endblock %}
