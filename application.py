@@ -40,18 +40,18 @@ def login():
         # ensure pasword and username is submitted
         if not request.form.get("username"):
             return apology("must provide username")
-        elif not request.form.get("password")
+        elif not request.form.get("password"):
             return apology("must provide password")
 
         # create user database
-        userdata = db.execute("CREATE TABLE if not exists userdata('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-        'userid' INTEGER, 'username' TEXT, 'hash' TEXT, FOREIGN KEY(userid) REFERENCES users(id))")
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("username"))
+
         # ensure username exists and password is correct
-        if len(userdata) != 1 or not pwd_context.verify(request.form.get("password"), rows[0]["hash"]):
+        if len(userdata) != 1 or not pwd_context.verify(request.form.get("password"), userdata[0]["hash"]):
             return apology("invalid username and/or password")
 
         # remember which user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = userdata[0]["id"]
 
         # redirect user to home page
         return redirect(url_for("index"))
@@ -92,21 +92,25 @@ def register():
         userdata = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
 
         # ensure username exists and password is correct
-        if len(rows) == 1:
+        if len(userdata) == 1:
             return apology("username already exists")
 
         # encrypt password
-        myctx = CryptContext(schemes=["sha256_crypt"],
-                             sha256_crypt__default_rounds=80000)
+        myctx = CryptContext(schemes=["sha256_crypt"], sha256_crypt__default_rounds=80000)
         hash = myctx.hash(request.form.get("password"))
 
         # insert user/password into userdata
-        db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",
-                   username=request.form.get("username"), hash=hash)
+        db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
 
-        userdata = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+        # create portfolio
+        db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
+
+        # create cookbook
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
+
         # remember wich user has logged in
-        session["user_id"] = rows[0]["id"]
+        session["user_id"] = userdata[0]["id"]
+
 
         return redirect(url_for("index"))
 
