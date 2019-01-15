@@ -44,7 +44,7 @@ def login():
             return apology("must provide password")
 
         # create user database
-        userdata = db.execute("CREATE TABLE if not exists history('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+        userdata = db.execute("CREATE TABLE if not exists userdata('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
         'userid' INTEGER, 'username' TEXT, 'hash' TEXT, FOREIGN KEY(userid) REFERENCES users(id))")
         # ensure username exists and password is correct
         if len(userdata) != 1 or not pwd_context.verify(request.form.get("password"), rows[0]["hash"]):
