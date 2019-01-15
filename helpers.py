@@ -35,3 +35,43 @@ def login_required(f):
 
 def getResults(keyword):
     """Looks up recipe with given keywords from user."""
+
+
+
+
+
+
+
+
+@app.route("/tried", methods=["GET", "POST"])
+def tried():
+
+    # insert into database if recipe clicked "tried"
+    db.execute("INSERT INTO portfolio (tried) VALUES (:tried)")
+
+    #sum all tried recipes
+    db.execute("SELECT tried, SUM(tried) AS tried, tried FROM portfolio WHERE UserID = :id",  id=session["user_id"])
+
+
+
+@app.route("/rated", methods=["GET", "POST"])
+def rated():
+
+    # insert into database if recipe clicked "rated"
+    db.execute("INSERT INTO portfolio (rated) VALUES (:rated)")
+
+    #sum all rated recipes
+    db.execute("SELECT rated, SUM(rated) AS rated, rated FROM portfolio WHERE UserID = :id",  id=session["user_id"])
+
+
+
+@app.route("/saved", methods=["GET", "POST"])
+def saved():
+
+    # insert into database if recipe clicked "saved"
+    db.execute("INSERT INTO portfolio (saved) VALUES (:saved)")
+
+    #sum all saved recipes
+    db.execute("SELECT saved, SUM(saved) AS saved, saved FROM portfolio WHERE UserID = :id",  id=session["user_id"])
+
+
