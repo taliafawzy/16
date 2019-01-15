@@ -59,8 +59,16 @@ def allrated():
     db.execute("INSERT INTO cookbook (rated) VALUES (:rated)")
 
     #average all rated recipes
-    db.execute("SELECT AVG(rated)")
+	averageRated = db.execute("SELECT * FROM rated, SELECT AVG(rated))
 
+@app.route("/tried", methods=["GET", "POST"])
+	def alltried():
+
+	    # insert into database if recipe clicked "rated"
+	    db.execute("INSERT INTO cookbook (tried) VALUES (:tried)")
+
+	    #select top 2 tried recipes
+	    bestTwo = db.execute("SELECT TOP 2 * FROM tried, tried FROM cookbook WHERE ingredient = request.form.get("ingredient"))
 
 @app.route("/rated", methods=["GET", "POST"])
 def personalrated():
