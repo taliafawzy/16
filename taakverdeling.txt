@@ -11,3 +11,7 @@ HTML/CSS:
     - Homepage: Miro
     - Mypage: Talia
         - saved_Recipes: Talia
+
+Inlog Edamam
+e-mailadres: talia_fawzy@hotmail.com
+wachtwoord: WebIK2019
