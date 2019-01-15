@@ -1,3 +1,10 @@
-test
-test2
-test3
+from cs50 import SQL
+from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask_session import Session
+from passlib.apps import custom_app_context as pwd_context
+from tempfile import mkdtemp
+from passlib.context import CryptContext
+from helpers import *
+
+# configure application
+app = Flask(__name__)
