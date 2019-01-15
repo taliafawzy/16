@@ -44,7 +44,7 @@ def getResults(keyword):
 
 
 @app.route("/tried", methods=["GET", "POST"])
-def tried():
+def personaltried():
 
     # insert into database if recipe clicked "tried"
     db.execute("INSERT INTO portfolio (tried) VALUES (:tried)")
@@ -55,7 +55,7 @@ def tried():
 
 
 @app.route("/rated", methods=["GET", "POST"])
-def rated():
+def personalrated():
 
     # insert into database if recipe clicked "rated"
     db.execute("INSERT INTO portfolio (rated) VALUES (:rated)")
@@ -66,7 +66,7 @@ def rated():
 
 
 @app.route("/saved", methods=["GET", "POST"])
-def saved():
+def personalsaved():
 
     # insert into database if recipe clicked "saved"
     db.execute("INSERT INTO portfolio (saved) VALUES (:saved)")
