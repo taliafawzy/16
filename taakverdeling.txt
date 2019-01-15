@@ -8,6 +8,33 @@ controllers:
 
 HTML/CSS:
     - Login/Register: Gizmo
-    - Homepage: Miro
+    - Homepage/recept opzoeken: Miro
     - Mypage: Talia
         - saved_Recipes: Talia
+
+Javascript:
+    - Homepage: Miro
+        - receptbekijken: Miro
+    - Saved_recipes: Gijs (rate recipe)
+
+CSS:
+    - Talia/*
+
+Database: Talia
+    - user tabel
+    - saved_recipes tabel
+    - tabel voor likes/ratings/tried(?)* recepten
+
+TODO:
+    - related likes
+    - rate recipe
+    - like recipe
+    - save recipe
+    - tried recipe
+    - apology functie in helper.py
+    -
+
+
+
+DONE:
+    -
