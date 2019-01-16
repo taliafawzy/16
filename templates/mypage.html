@@ -35,16 +35,27 @@
         <th>Rating</th>
       </tr>
 
-      {% for recipe in recipes %}
+    {% for recipe in recipes if recipe.tried == True %}
         <tr>
             <td>{{recipe.recipe}}</td>
             <td>{{recipe.link}}</td>
             <td>{{recipe.tried}}</td>
             <td>{{recipe.rating}}</td>
         </tr>
-
     {% endfor %}
 
+    {% else %}
+        <tr>
+            <td>{{recipe.recipe}}</td>
+            <td>{{recipe.link}}</td>
+            <td>
+                <div class="form-group">
+                <button class="btn btn-default" name = "tried" type="submit">Tried!</button>
+                </div>
+            </td>
+            <td>{{recipe.rating}}</td>
+        </tr>
+    {% endif %}
 
 </table>
 

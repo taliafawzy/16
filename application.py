@@ -116,3 +116,21 @@ def register():
 
     else:
         return render_template("register.html")
+
+@app.route("/mypage", methods = ["GET", "POST"])
+@login_required
+def mypage():
+    if request.method == "POST":
+
+        if request.form.get("rated"):
+            rating = db.execute("SELECT rating FROM cookbook WHERE rated = :rated AND userid = :userid", rated = request.form.get("rated"), userid = session["userid"])
+            rating = personal_rating(rating)
+
+        if request.form.get("tried"):
+            recipe = db.execute("SELECT recipe FROM cookbook WHERE tried = :tried AND userid = :userid", tried = request.form.get("tried"), userid = session["userid"])
+            recipe = tried_recipe(recipe)
+
+        return render_template("mypage.html")
+
+    else:
+        return render_template("mypage.html")
