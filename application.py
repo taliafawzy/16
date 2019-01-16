@@ -100,7 +100,7 @@ def register():
         hash = myctx.hash(request.form.get("password"))
 
         # insert user/password into userdata
-        db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
+        db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
 
         # create portfolio
         db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
