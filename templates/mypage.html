@@ -26,4 +26,26 @@
     </tr>
 
 </table>
+
+<table class="table table-striped" style="width:100%">
+     <tr>
+        <th>Recipe</th>
+        <th>Link</th>
+        <th>Tried</th>
+        <th>Rating</th>
+      </tr>
+
+      {% for recipe in recipes %}
+        <tr>
+            <td>{{recipe.recipe}}</td>
+            <td>{{recipe.link}}</td>
+            <td>{{recipe.tried}}</td>
+            <td>{{recipe.rating}}</td>
+        </tr>
+
+    {% endfor %}
+
+
+</table>
+
 {% endblock %}
