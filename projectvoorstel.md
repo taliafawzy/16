@@ -1,21 +1,39 @@
 # Projectvoorstel
 ## Samenvatting
-Het idee is om een website te maken die recepten bij elkaar verzamelt op basis van ingrediënten die mensen invoeren in de zoekbalk. De website kan hiermee twee problemen aanpakken. Ten eerste hoeven mensen de restjes in de koelkast niet weg te gooien; ze kunnen immers op de website een gerecht zoeken wat ervan gemaakt kan worden. Dit gaat voedselverspilling tegen. Daarnaast is het makkelijker om een recept op te zoeken waarvan je de ingrediënten al in huis hebt en hoeft de persoon in kwestie niet nog naar de supermarkt voor allerlei ingrediënten. Er kan dus meteen worden gekookt. Dit zou dus een goede oplossing kunnen zijn voor mensen die net van het werk afkomen en geen zin/tijd hebben om nog naar de supermarkt te gaan, maar wel graag een nieuw recept uit willen proberen. 
+Het idee is om een website te maken die recepten bij elkaar verzamelt op basis van ingrediënten die mensen aanklikken in de zoekbalk. De website geeft in eerste instantie alleen de keuze uit verse producten (vlees, zuivel, vis, groente, fruit). Dit is gericht op het tegengaan van voedselverspilling. Als de verse ingrediënten zijn aangeklikt krijgt de gebruiker recepten terug en een lijst met ingrediënten die worden gecombineerd met het gekozen ingrediënt. De lijst aan ingrediënten die de gebruiker terugkrijgt bestaat uit zowel verse als houdbare producten. De gebruiker kan kijken welke ingrediënten hij/zij verder in huis heeft en kan op de ingrediënten in de lijst klikken om recepten terug te krijgen met de gekozen combinatie.
 
 ## Schetsen
-Een PowerPoint met schetsen van de website.
+Schetsen van website in powerpoint. De volgende pagina's zijn nodig:
+-   homepage.html
+-   login.html
+-   register.html
+-   results.html
+-   recipe.html
+-   mypage.html
+### Databases
+![](https://github.com/taliafawzy/16/blob/master/databases.PNG)
 
 ## Features
-1. Gebruikers kunnen een profiel aanmaken
-2. De mogelijkheid om recepten op te slaan
-3. De mogelijkheid om een review achter te laten bij een recept
-4. Liken van reviews van anderen
-5. De mogelijkheid om een recepten een rating te geven
-6. Aangeven of je een recept hebt geprobeerd of niet
-7. Profielfoto invoegen
+1. Gebruiker kunnen inloggen
+2. Gebruikers kunnen registreren
+3. Er wordt voor iedere geregistreerde gebruiker een cookbook en portfolio aangemaakt
+4. Gebruikers kunnen uitloggen
+5. Gebruikers kunnen uit een uitvouwmenu recepten aanklikken
+6. Gebruikers krijgen recepten met dit/deze ingrediënt(en) terug
+7. Gebruikers krijgen (naast de recepten) ook andere ingrediënten te zien die vaak gecombineerd worden met het/de gekozen ingrediënt(en)
+8. Gebruikers kunnen deze andere ingrediënten aanklikken en krijgen dan een niewue lijst van recepten terug
+9. Gebruikers kunnen de gegeven recepten aanklikken
+10. Gebruiker kunnen, mits ingelogd, een recept opslaan in hun cookbook
+11. Gebruikers kunnen, mits ingelogd, een recept op de receptpagina waarderen
+12. Gebruikers kunnen op hun profielpagina aangeven of een recept is geprobeerd
+13. Gebruikers kunnen op hun profielpagina een persoonlijke rating aan een recept geven
+14. Opgeslagen recepten worden met naam, link, 'tried' button of 'YES' en wel/geen rating in een tabel op de profielpagina getoond
+15. Op de profielpagina wordt de gebruikersnaam van de gebruiker getoond en wordt bijgehouden hoeveel recepten zijn geprobeerd, gereviewd en opgeslagen
+16. Gebruikers krijgen bij een aangeklikt recept te zien welke recepten ook zijn opgeslagen door gebruikers die getoonde recept ook in hun cookbook hebben
+
 
 ## Minimum viable product
-Gebruikers kunnen via de website zoeken naar recepten met de specifieke ingrediënten die zij invoeren. Het product laat gebruikers hun favoriete recepten opslaan op een persoonlijke pagina die toegangelijk is voor andere gebruikers. Ze kunnen daar aangeeven of ze het recept hebben geprobeerd en ze kunnen het recept waarderen door middel van het geven van sterren. Ook kunnen ze reviews achterlaten onder een recept en de reviews van andere gebruikers liken. 
+Gebruikers kunnen via de website zoeken naar recepten met de specifieke ingrediënten die zij aanklikken. Het product laat gebruikers hun favoriete recepten opslaan die zij op hun persoonlijke pagina kunnen bekijken. Ze kunnen daar aangeven of ze het recept hebben geprobeerd en ze kunnen het recept waarderen door middel van het geven van sterren. Ook kunnen ze het recept op de receptpagina een rating geven.
 
 ## Afhankelijkheden
 ### Databronnen
@@ -35,14 +53,14 @@ https://www.sqlite.org/index.html
 
 ### Concurrerende bestaande websites
 - http://myfridgefood.com/
-Handig aan deze website is dat je ingrediënten aan kunt klikken in de quick search en zelf recepten kunt toevoegen. 
+Handig aan deze website is dat je ingrediënten aan kunt klikken in de quick search en zelf recepten kunt toevoegen.
 - https://emptythefridge.be/
 Naast recepten heeft de website ook een blog. Dit is misschien voor een bepaald publiek interessant. Zo geeft de auteur tips & tricks om eten te bewaren. Daarnaast heeft de wesite ook een seizoenstabel met ingredïenten, welke aangeeft wat wanneer vaak te verkrijgen is.
 - https://www.keukenliefde.nl/kook-koelkast-leeg/
-Deze website geeft de mogelijkheid om te sorten op menugang, soort gerecht en thema. Er staan ook knoppen bij het recept die het de gebruiker mogelijk maken om het recept te kopiëren of een printversie te openen. 
+Deze website geeft de mogelijkheid om te sorten op menugang, soort gerecht en thema. Er staan ook knoppen bij het recept die het de gebruiker mogelijk maken om het recept te kopiëren of een printversie te openen.
 - https://www.supercook.com/#/recipes
 Mooie gebruiksvriendelijke layout.
 
 ### Moeilijke delen
 - HTML en CSS layout er mooi en overzichtelijk uit laten zien.
-- Het taggen van de recepten.
+- Het zoeken van recepten
