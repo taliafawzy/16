@@ -20,11 +20,7 @@ class Edaman(object):
             recipe = hit["recipe"]
             name = recipe["label"]
             recipes[name] = {}
-            recipes[name]["nutrients"] = recipe["totalNutrients"]
-            recipes[name]["cautions"] = recipe["cautions"]
             recipes[name]["health_labels"] = recipe["healthLabels"]
-            recipes[name]["diet_labels"] = recipe["dietLabels"]
-            recipes[name]["calories"] = recipe["calories"]
             recipes[name]["ingredients"] = recipe["ingredientLines"]
             recipes[name]["url"] = recipe["url"]
         return recipes
