@@ -135,3 +135,15 @@ def mypage():
 
     else:
         return render_template("mypage.html")
+
+@app.route("/homepage", methods = ["GET", "POST"])
+def homepage():
+    if request.method == "POST":
+        if request.form.get("ingredient"):
+            ingredient = request.form.get("ingredient")
+            getResults(ingredient)
+        return render_template("results.html")
+    else:
+        return render_template("homepage.html")
+
+
