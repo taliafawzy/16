@@ -1,0 +1,93 @@
+<html lang="en">
+
+    <head>
+
+        <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
+        <meta charset="utf-8"/>
+        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+
+        <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
+
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <center><title>homepage</title></center>
+
+    </head>
+<body>
+  <center>
+    <div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">What's in your fridge?</h1>
+    <p class="lead">Click on a category to select what you have!</p>
+  </div>
+<div class="container">
+  <div class="row">
+    <div class="col-md">
+</div>
+  <p>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#dairy" aria-expanded="false" aria-controls="multiCollapseExample1">Dairy</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#meat" aria-expanded="false" aria-controls="multiCollapseExample2">Meat</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Fish & Seafood</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Fruit</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5">Vegetables</button>
+  </p>
+  </div>
+  <div class="row">
+    <div class="col">
+      <div class="collapse multi-collapse" id="dairy">
+        <div class="card card-body">
+          <form action="{{ url_for('searchrecipe') }}" method="post">
+            <input type="checkbox" name="milk" value="milk" id="milk"><label for="milk"> Milk </label>&nbsp
+            <input type="checkbox" name="cheese" value="cheese" id="cheese"><label for="cheese"> Cheese </label>&nbsp
+            <input type="checkbox" name="butter" value="butter" id="butter"><label for="butter"> Butter </label>&nbsp
+            <input type="checkbox" name="sourcream" value="sourcream" id="sourcream"><label for="sourcream"> Sour Cream </label>
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="collapse multi-collapse" id="meat">
+        <div class="card card-body">
+            <input type="checkbox" name="bacon" value="bacon" id="bacon"><label for="bacon"> Bacon </label>&nbsp
+            <input type="checkbox" name="beef" value="beef" id="beef"><label for="beef"> Beef </label>&nbsp
+            <input type="checkbox" name="chicken" value="chicken" id="chicken"><label for="chicken"> Chicken </label>&nbsp
+            <input type="checkbox" name="turkey" value="turkey" id="turkey"><label for="turkey"> Turkey </label>
+        </div>
+      </div>
+    </div>
+      <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample3">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample4">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="collapse multi-collapse" id="multiCollapseExample5">
+        <div class="card card-body">
+          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+        </div>
+      </div>
+    </div>
+        <fieldset>
+                <button class="btn btn-info" type="submit">Search!</button>
+            </div>
+        </fieldset>
+    </form>
+  </div>
+  </center>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+</html>
