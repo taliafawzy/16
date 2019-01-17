@@ -1,19 +1,16 @@
-from edamam import *
+from puppy import *
 
-test = Edaman(recipes_appid='f3fd7ba6',
-           recipes_appkey='2171c8a5d3d1bc0087955191c4209734')
+test = Puppy()
 
-lijst = test.search_recipe("milk and chicken and cheese")
-
+lijst = test.search_recipe(["salmon"])
 
 ingrediënten = []
 for key in lijst:
-    print(key)
-    print(lijst[key]['ingredients'])
     rijen = lijst[key]['ingredients']
-    for rij in rijen:
-        if rij in ingrediënten:
+    ingridients =[x.strip() for x in rijen.split(",")]
+    for ingridient in ingridients:
+        if ingridient in ingrediënten:
             continue
         else:
-            ingrediënten.append(rij)
+            ingrediënten.append(ingridient)
 print(ingrediënten)

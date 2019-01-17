@@ -5,7 +5,7 @@ from cs50 import SQL
 
 from flask import redirect, render_template, request, session
 from functools import wraps
-from edadam import *
+from puppy import *
 
 # configure CS50 Library to use SQLite database
 db = SQL("sqlite:///16.db")
@@ -41,9 +41,8 @@ def login_required(f):
 
 def getResults(ingredient):
     """Looks up recipe with given ingredients from user."""
-    key = Edaman(recipes_appid='f3fd7ba6',
-           recipes_appkey='2171c8a5d3d1bc0087955191c4209734')
-    recipelist = key.search_recipe(ingredient)
+    recipelist = puppy.search_recipe(ingredient)
+    return recipelist
 
 
 
@@ -85,8 +84,9 @@ def common_rating(single_rating):
 
     return common_rating
 
-def related_recipes():
+def related_recipes(recipe):
     """Returns recipes that were also saved by people who saved visited recipe."""
+
 
 
 
