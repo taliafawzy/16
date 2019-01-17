@@ -5,7 +5,7 @@ from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
 from passlib.context import CryptContext
 from helpers import *
-from edamam import *
+from puppy import *
 
 # configure application
 app = Flask(__name__)
