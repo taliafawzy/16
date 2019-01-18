@@ -107,7 +107,7 @@ def register():
         db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
 
         # create cookbook
-        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id), FOREIGN KEY(recipeid) REFERENCES recipe(id)")
 
         # remember wich user has logged in
         session["user_id"] = userdata[0]["id"]
@@ -145,3 +145,11 @@ def homepage():
         return render_template("results.html")
     else:
         return render_template("homepage.html")
+
+@app.route("/results", methods = ["GET", "POST"])
+def result_page():
+    if request.method == "POST":
+        recipe = request.form.get("recipe")
+        return render_template("recipe.html")
+    else:
+        getResults(ingredient)

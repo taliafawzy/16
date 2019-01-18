@@ -1,7 +1,7 @@
 import csv
 import urllib.request
 from cs50 import SQL
-
+import random
 
 from flask import redirect, render_template, request, session
 from functools import wraps
@@ -87,10 +87,8 @@ def common_rating(single_rating):
 def related_recipes(recipe):
     """Returns recipes that were also saved by people who saved visited recipe."""
 
+    recipeid = db.execute("SELECT id FROM recipe WHERE recipe = :recipe", recipe = recipe)
+    related_users = db.execute("SELECT userid FROM cookbook WHERE recipeid = :recipeid", recipeid = recipeid)
+    related_recipes_from_users = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid", userid = related_users)
 
-
-
-
-
-
-
+    random.sample(set(related_recipes_from_users), 2)
