@@ -31,7 +31,7 @@ main td
 }
 
 
-# style html register/login
+
 .login-page {
   width: 360px;
   padding: 8% 0 0;
@@ -65,7 +65,7 @@ main td
   padding: 10px 24px;
 }
 
-}
+
 .form .message {
   margin: 15px 0 0;
   color: #b3b3b3;

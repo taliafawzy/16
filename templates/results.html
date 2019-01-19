@@ -6,4 +6,13 @@
 
 {% block main %}
     <form action="{{ url_for('results') }}" method="post">
+    <table class="table table-striped">
+        {% for recipe in recipenames %}
+        <tr>
+            <td>
+                <button class="btn default" id = "recipe">{{recipe}}</button>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

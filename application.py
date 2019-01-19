@@ -147,8 +147,9 @@ def homepage():
     if request.method == "POST":
         if request.form.getlist("ingredient"):
             ingredient = request.form.getlist("ingredient")
-            getResults(ingredient)
-        return render_template("results.html")
+            recipelist = getResults(ingredient)
+            session['recipelist'] = recipelist
+            return redirect(url_for("results"))
     else:
         return render_template("homepage.html")
 
@@ -158,4 +159,8 @@ def results():
         recipe = request.form.get("recipe")
         return render_template("recipe.html")
     else:
-        getResults(ingredient)
+        recipelist = session['recipelist']
+        recipenames = []
+        for recipe in recipelist:
+            recipenames.append(recipe.strip())
+        return render_template("results.html", recipenames = recipenames)
