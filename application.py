@@ -52,10 +52,10 @@ def login():
             return apology("invalid username and/or password")
 
         # remember which user has logged in
-        session["user_id"] = userdata[0]["id"]
+        session["userid"] = userdata[0]["id"]
 
         # redirect user to home page
-        return redirect(url_for("homepage.html"))
+        return redirect(url_for("homepage"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -68,7 +68,7 @@ def logout():
     session.clear()
 
     # redirect user to login form
-    return redirect(url_for("login.html"))
+    return redirect(url_for("login"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -90,7 +90,7 @@ def register():
             return apology("password does not match")
 
         # query database for username
-        userdata = db.execute("SELECT * FROM users WHERE username = :username", username=request.form.get("username"))
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("username"))
 
         # ensure username exists and password is correct
         if len(userdata) == 1:
@@ -101,19 +101,19 @@ def register():
         hash = myctx.hash(request.form.get("password"))
 
         # insert user/password into userdata
-        db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
+        userdata = db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
 
         # create portfolio
-        db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id))")
+        db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id))")
 
         # create cookbook
-        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES users(id), FOREIGN KEY(recipeid) REFERENCES recipe(id)")
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
         # remember wich user has logged in
-        session["user_id"] = userdata[0]["id"]
+        session["userid"] = userdata[0]["id"]
 
 
-        return redirect(url_for("homepage.html"))
+        return redirect(url_for("homepage"))
 
     else:
         return render_template("register.html")

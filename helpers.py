@@ -43,6 +43,7 @@ def getResults(ingredient):
     """Looks up recipe with given ingredients from user."""
     puppy = Puppy()
     recipelist = puppy.search_recipe(ingredient)
+
     return recipelist
 
 
