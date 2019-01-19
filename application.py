@@ -123,6 +123,12 @@ def register():
 def mypage():
     if request.method == "POST":
 
+        portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
+        name = portfolio[0]["username"]
+        tried = portfolio[0]["tried"]
+        saved = portfolio[0]["saved"]
+        rated = portfolio[0]["rated"]
+
         if request.form.get("rated"):
             rating = db.execute("SELECT rating FROM cookbook WHERE rated = :rated AND userid = :userid", rated = request.form.get("rated"), userid = session["userid"])
             rating = personal_rating(rating)
@@ -131,7 +137,7 @@ def mypage():
             recipe = db.execute("SELECT recipe FROM cookbook WHERE tried = :tried AND userid = :userid", tried = request.form.get("tried"), userid = session["userid"])
             recipe = tried_recipe(recipe)
 
-        return render_template("mypage.html")
+        return render_template("mypage.html", tried, saved, rated)
 
     else:
         return render_template("mypage.html")
