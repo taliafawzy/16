@@ -55,7 +55,7 @@ def login():
         session["user_id"] = userdata[0]["id"]
 
         # redirect user to home page
-        return redirect(url_for("index"))
+        return redirect(url_for("homepage.html"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -68,7 +68,7 @@ def logout():
     session.clear()
 
     # redirect user to login form
-    return redirect(url_for("login"))
+    return redirect(url_for("login.html"))
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -113,7 +113,7 @@ def register():
         session["user_id"] = userdata[0]["id"]
 
 
-        return redirect(url_for("index"))
+        return redirect(url_for("homepage.html"))
 
     else:
         return render_template("register.html")
@@ -147,7 +147,7 @@ def homepage():
         return render_template("homepage.html")
 
 @app.route("/results", methods = ["GET", "POST"])
-def result_page():
+def results():
     if request.method == "POST":
         recipe = request.form.get("recipe")
         return render_template("recipe.html")

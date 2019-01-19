@@ -1,13 +1,45 @@
-{% extends "layout.html" %}
+{% extends "16layout.html" %}
 
 {% block title %}
-    Profile
+    My Page
 {% endblock %}
 
 {% block main %}
 
+<html lang="en">
+    <head>
 
-<table class="table table-striped">
+        <title>My Page</title>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <nav class="navbar navbar-default">
+                    <div class="collapse navbar-collapse" id="navbar">
+                        {% if session.userid %}
+                            <ul class="nav navbar-left">
+                                <li><a href="{{ url_for('homepage') }}">Home</a></li>
+                            </ul>
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('logout') }}">Log Out</a></li>
+                            </ul>
+                        {% else %}
+                            <ul class="nav navbar-nav navbar-right">
+                                <li><a href="{{ url_for('register') }}">Register</a></li>
+                                <li><a href="{{ url_for('login') }}">Log In</a></li>
+                            </ul>
+                        {% endif %}
+                    </div>
+            </nav>
+
+        </div>
+
+    </body>
+
+    <table class="table table-striped">
     <tr>
         <th>Username</th>
         <td>{{portfolio.username}}</td>
@@ -59,4 +91,10 @@
 
 </table>
 
-{% endblock %}
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
+</html>
+
+

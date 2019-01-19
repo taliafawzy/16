@@ -34,13 +34,14 @@ def login_required(f):
     """
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        if session.get("user_id") is None:
+        if session.get("userid") is None:
             return redirect("/login")
         return f(*args, **kwargs)
     return decorated_function
 
 def getResults(ingredient):
     """Looks up recipe with given ingredients from user."""
+    puppy = Puppy()
     recipelist = puppy.search_recipe(ingredient)
     return recipelist
 

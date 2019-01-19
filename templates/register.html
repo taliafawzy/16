@@ -1,23 +1,24 @@
-<!DOCTYPE html>
+{% extends "16layout.html" %}
 
-<html lang="en">
-    <head>
-        <link href="Styles.css" rel="stylesheet">
-        <title>Register</title>
-    </head>
-    <body class="body" class="form">
-        <center><h3>Sign up</h3></center>
-            <form class= "form">
-            <center>Username:<br></center>
-            <center><input type="text" name="Username" placeholder="Username"><br></center>
-            <center>Password:<br></center>
-            <center><input type="password" name="password" placeholder="Password"></center>
-             <center>Confirm password:<br></center>
-            <center><input type="confirmation" name="confirmation" placeholder="Confirm password"></center>
-            <center><button type="button" class = "button">Register</button></center>
-             <center>
-                <p class="message">Do you already have an account? <a href="https://ide50-uni-2018.legacy.cs50.io:8080/login.html">Login</a></p>
-            </center>
-        </form>
-    </body>
-</html>
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('register') }}" method="post">
+        <fieldset>
+            <div class="form-group">
+                <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="password" placeholder="Password" type="password"/>
+            </div>
+            <div class="form-group">
+                <input class="form-control" name="confirmation" placeholder="Password (again)" type="password"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-default" type="submit">Register</button>
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

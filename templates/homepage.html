@@ -1,22 +1,12 @@
-<html lang="en">
+{% extends "16layout.html" %}
 
-    <head>
+{% block title %}
+    Homepage
+{% endblock %}
 
-        <!-- https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta -->
-        <meta charset="utf-8"/>
-        <meta content="initial-scale=1, width=device-width" name="viewport"/>
+{% block main %}
+    <form action="{{ url_for('homepage') }}" method="post">
 
-        <!-- documentation at http://getbootstrap.com/, alternative themes at https://www.bootstrapcdn.com/bootswatch/ -->
-        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
-
-        <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet"/>
-
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-        <center><title>homepage</title></center>
-
-    </head>
 <body>
   <center>
     <div class="jumbotron jumbotron-fluid">
@@ -40,7 +30,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="dairy">
         <div class="card card-body">
-          <form action="{{ url_for('searchrecipe') }}" method="post">
+          <form action="{{ url_for('results') }}" method="post">
             <input type="checkbox" name="ingredient" value="milk" id="milk"><label for="milk"> Milk </label>&nbsp
             <input type="checkbox" name="ingredient" value="cheese" id="cheese"><label for="cheese"> Cheese </label>&nbsp
             <input type="checkbox" name="ingredient" value="butter" id="butter"><label for="butter"> Butter </label>&nbsp
@@ -91,3 +81,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 </body>
 </html>
+{%endblock%}
