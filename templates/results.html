@@ -6,13 +6,21 @@
 
 {% block main %}
     <form action="{{ url_for('results') }}" method="post">
+
+    <h1>Recipes that match your choice of {{choice}}</h1>
+
+
     <table class="table table-striped">
-        {% for recipe in recipenames %}
+        {% for recipe in recipes %}
         <tr>
             <td>
-                <button class="btn default" id = "recipe">{{recipe}}</button>
+                <img src="{{recipe.picture}}">
+            </td>
+            <td>
+                <button class="btn btn-info" name="submit_button" value="{{recipe.name}}" type="submit">{{recipe.name}}</button>
             </td>
         </tr>
         {% endfor %}
     </table>
+    </form>
 {% endblock %}

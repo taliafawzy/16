@@ -1,0 +1,27 @@
+{% extends "16layout.html" %}
+
+{% block title %}
+    Recipe
+{% endblock %}
+
+{% block main %}
+    <form action="{{ url_for('recipe') }}" method="post">
+    <table class="table table-striped" style="width:100%">
+     <tr>
+        <th>Recipe</th>
+        <th>Picture</th>
+        <th>URL</th>
+        <th>Ingredients</th>
+    </tr>
+
+
+    <tr>
+        <td>{{recipe.name}}</td>
+        <td><img src="{{recipe.picture}}"></td>
+        <td><a href="{{recipe.url}}">{{recipe.url}}</a></td>
+        <td>{{recipe.ingredients}}</td>
+    </tr>
+
+</table>
+
+{% endblock %}
