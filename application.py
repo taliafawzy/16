@@ -103,14 +103,22 @@ def register():
         # insert user/password into userdata
         userdata = db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
 
+        # query database for username
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("username"))
+
+        # remember wich user has logged in
+        session["userid"] = userdata[0]["id"]
+
         # create portfolio
         db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id))")
+
+        # update portfolio
+        db.execute("INSERT INTO portfolio (userid,tried, saved, rated) VALUES(:userid, 0,0,0)", userid = session["userid"])
 
         # create cookbook
         db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
-        # remember wich user has logged in
-        session["userid"] = userdata[0]["id"]
+
 
 
         return redirect(url_for("homepage"))
@@ -123,11 +131,6 @@ def register():
 def mypage():
     if request.method == "POST":
 
-        portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
-        name = portfolio[0]["username"]
-        tried = portfolio[0]["tried"]
-        saved = portfolio[0]["saved"]
-        rated = portfolio[0]["rated"]
 
         if request.form.get("rated"):
             rating = db.execute("SELECT rating FROM cookbook WHERE rated = :rated AND userid = :userid", rated = request.form.get("rated"), userid = session["userid"])
@@ -137,10 +140,16 @@ def mypage():
             recipe = db.execute("SELECT recipe FROM cookbook WHERE tried = :tried AND userid = :userid", tried = request.form.get("tried"), userid = session["userid"])
             recipe = tried_recipe(recipe)
 
-        return render_template("mypage.html", tried=tried, saved=saved, rated=rated)
+        return render_template("mypage.html")
 
     else:
-        return render_template("mypage.html")
+        user = db.execute("SELECT username FROM userdata WHERE id = :id", id = session["userid"])
+        user = user[0]["username"]
+        portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
+        tried = portfolio[0]["tried"]
+        saved = portfolio[0]["saved"]
+        rated = portfolio[0]["rated"]
+        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated = rated)
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
