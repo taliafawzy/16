@@ -154,6 +154,7 @@ def homepage():
     else:
         return render_template("homepage.html")
 
+#TODO: error if puppy API gives no results
 @app.route("/results", methods = ["GET", "POST"])
 def results():
     if request.referrer and request.referrer.endswith("homepage"):
@@ -162,18 +163,23 @@ def results():
         choice = session['choice']
         choice = ','.join(choice)
         recipes = []
+        ingredientsSet = set()
         #we create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
         for recipe in recipelist:
             recipeDict = dict.fromkeys(['name', 'picture', 'url'])
             recipeDict['name'] = recipe.strip()
+            ingredient = (recipelist[recipe]["ingredients"]).split(',')
+            for food in ingredient:
+                ingredientsSet.add(food.strip())
             recipeDict['picture'] = recipelist[recipe]["picture"]
             recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
             recipeDict['url'] = recipelist[recipe]["url"]
             recipes.append(recipeDict)
         session['recipes'] = recipes
-        return render_template("results.html", choice=choice, recipes = recipes)
+
+        return render_template("results.html", choice=choice, recipes = recipes, ingredientsSet = ingredientsSet)
     elif request.referrer and request.referrer.endswith("results") and request.method == "POST":
-        if request.form['submit_button']:
+        if  "submit_button" in request.form:
             #get the recipeName from the form that was just submitted
             recipeName = request.form['submit_button']
             #get the saved recipes list
@@ -182,6 +188,32 @@ def results():
             recipe = next(item for item in recipes if item["name"] == recipeName)
             session['recipe'] = recipe
             return redirect(url_for("recipe"))
+        elif "extra_ingredient_submit_button" in request.form:
+            #get previous choice and update it
+            choice = session['choice']
+            newChoice = request.form['extra_ingredient_submit_button']
+            choice.append(newChoice)
+            session['choice'] = choice
+            #get new ingredients
+            recipelist = getResults(choice)
+            recipes = []
+            ingredientsSet = set()
+            #we create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
+            for recipe in recipelist:
+                recipeDict = dict.fromkeys(['name', 'picture', 'url'])
+                recipeDict['name'] = recipe.strip()
+                ingredient = (recipelist[recipe]["ingredients"]).split(',')
+                for food in ingredient:
+                    ingredientsSet.add(food.strip())
+                recipeDict['picture'] = recipelist[recipe]["picture"]
+                recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
+                recipeDict['url'] = recipelist[recipe]["url"]
+                recipes.append(recipeDict)
+            session['recipes'] = recipes
+
+            return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
+
+
 
 
 @app.route("/recipe", methods = ["GET", "POST"])
