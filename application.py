@@ -149,7 +149,7 @@ def mypage():
         tried = portfolio[0]["tried"]
         saved = portfolio[0]["saved"]
         rated = portfolio[0]["rated"]
-        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated = rated)
+        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated)
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
@@ -230,7 +230,7 @@ def recipe():
     recipe = session['recipe']
 
     if request.method == "POST":
-        if request.form.get("save"):
+        if request.form.get("save_recipe"):
             recipe = save_recipe(recipe)
         return render_template("recipe.html", recipe = recipe)
     else:
