@@ -65,8 +65,10 @@ def save_recipe(recipe):
     # update amount of recipes saved in portfolio
     db.execute("UPDATE portfolio SET saved = saved + 1 WHERE userid = :userid", userid = session["userid"])
 
+    cookbook = db.execute("SELECT * FROM recipe")
+    print(cookbook)
     # get recipeid
-    recipeid = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipe["name"])
+    recipeid = db.execute("SELECT id FROM recipe WHERE recipe = :recipe", recipe = recipe["name"])
     print(recipeid)
     recipeid = recipeid[0]['id']
     print(recipeid)

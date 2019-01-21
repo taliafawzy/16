@@ -187,9 +187,9 @@ def results():
             recipeDict['url'] = recipelist[recipe]["url"]
             recipes.append(recipeDict)
 
-            recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipe)
+            recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
             if len(recipeDatabase) == 0:
-                db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipe, rating = 0, people = 0)
+                db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
         session['recipes'] = recipes
 
         return render_template("results.html", choice=choice, recipes = recipes, ingredientsSet = ingredientsSet)
@@ -225,9 +225,9 @@ def results():
                 recipeDict['url'] = recipelist[recipe]["url"]
                 recipes.append(recipeDict)
 
-                recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipe)
+                recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
                 if len(recipeDatabase) == 0:
-                    db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipe, rating = 0, people = 0)
+                    db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
                 session['recipes'] = recipes
 
             return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
