@@ -53,23 +53,27 @@ def tried_recipe(recipe):
     """Updates amount of recipes tried in portfolio and updates boolean in cookbook."""
 
     # update amount of recipes tried in portfolio
-    db.execute("UPDATE portfolio SET tried = :tried WHERE userid = :userid", tried=+1, userid = session["userid"])
+    db.execute("UPDATE portfolio SET tried = tried + 1 WHERE userid = :userid", userid = session["userid"])
 
     # update boolean 'tried' in cookbook
-    db.execute("UPDATE cookbook SET tried = :tried WHERE userid = :userid", tried = True, userid = session["userid"])
+    tried = db.execute("UPDATE cookbook SET tried = 1 WHERE userid = :userid AND recipe = :recipe", userid = session["userid"], recipe = recipe)
 
-    return tried_recipe
+    return tried
 
 def save_recipe(recipe):
     """Updates amount of recipes saved in portfolio and inserts recipe into cookbook."""
 
     # update amount of recipes saved in portfolio
-    db.execute("UPDATE portfolio SET saved = :saved WHERE userid = :userid", saved=+1, userid = session["userid"])
+    db.execute("UPDATE portfolio SET saved = saved + 1 WHERE userid = :userid", userid = session["userid"])
+
+    # get recipeid
+    recipeid = db.execute("SELECT id FROM recipe WHERE recipe = :recipe", recipe = recipe["name"])
+    recipeid = recipeid[0]['id']
 
     # register recipe into cookbook
-    db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried, rated) VALUES(:userid, :recipeid :recipe, :link, :tried, :rated)", recipe = recipe['name'], link = recipe["url"], tried = False, rated = 0, id = session["userid"])
+    saved_recipe = db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried, rated) VALUES(:userid, :recipeid, :recipe, :link, :tried, :rated)", recipeid = recipeid, recipe = recipe['name'], link = recipe["url"], tried = 0, rated = 0, userid = session["userid"])
 
-    return save_recipe
+    return saved_recipe
 
 def personal_rating(rating):
     """Updates rating of recipe in cookbook."""

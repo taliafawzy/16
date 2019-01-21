@@ -121,3 +121,12 @@ main td
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.background
+{
+  background-image: url("achtergrond.jpg")
+  height: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
