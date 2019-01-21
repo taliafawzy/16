@@ -66,7 +66,7 @@ def save_recipe(recipe):
     db.execute("UPDATE portfolio SET saved = :saved WHERE userid = :userid", saved=+1, userid = session["userid"])
 
     # register recipe into cookbook
-    db.execute("INSERT INTO cookbook (recipe, link, tried, rated) VALUES(:recipe, :link, :tried, :rated) WHERE userid = :userid", recipe = recipeDict['name'], link = recipeDict["url"], tried = False, rated = 0, userid = session["userid"])
+    db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried, rated) VALUES(:userid, :recipeid :recipe, :link, :tried, :rated)", recipe = recipe['name'], link = recipe["url"], tried = False, rated = 0, id = session["userid"])
 
     return save_recipe
 
