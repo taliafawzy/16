@@ -39,12 +39,12 @@
         <tr>
             <td>{{recipe.recipe}}</td>
             <td>{{recipe.link}}</td>
-            {% if recipe.tried == TRUE %}
-            <td>{{recipe.tried}}</td>
+            {% if recipe.tried == 1 %}
+            <td>YES</td>
             {% else %}
             <td>
                 <div class="form-group">
-                <button class="btn btn-default" name = "tried" type="submit">Tried!</button>
+                <button class="btn btn-info" name="tried" value="{{recipe.recipe}}" type="submit">Tried!</button>
                 </div>
             </td>
             {% endif %}
