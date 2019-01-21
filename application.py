@@ -149,7 +149,9 @@ def mypage():
         tried = portfolio[0]["tried"]
         saved = portfolio[0]["saved"]
         rated = portfolio[0]["rated"]
-        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated)
+
+        cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
+        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
@@ -226,7 +228,7 @@ def results():
                 recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipe)
                 if len(recipeDatabase) == 0:
                     db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipe, rating = 0, people = 0)
-            session['recipes'] = recipes
+                session['recipes'] = recipes
 
             return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
 
@@ -240,6 +242,6 @@ def recipe():
     if request.method == "POST":
         if request.form.get("save_recipe"):
             recipe = save_recipe(recipe)
-        return render_template("recipe.html", recipe = recipe)
+            return redirect(url_for("recipe"))
     else:
         return render_template("recipe.html", recipe = recipe)
