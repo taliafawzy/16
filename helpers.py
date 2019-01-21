@@ -3,6 +3,7 @@ import urllib.request
 from cs50 import SQL
 import random
 
+
 from flask import redirect, render_template, request, session
 from functools import wraps
 from puppy import *
@@ -94,3 +95,24 @@ def related_recipes(recipe):
     related_recipes_from_users = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid", userid = related_users)
 
     random.sample(set(related_recipes_from_users), 2)
+
+def checklist():
+    with open('ingredientslist.csv', newline='') as csvfile:
+        rows = csv.reader(csvfile, delimiter=',')
+        fishlist = []
+        meatlist = []
+        dairylist = []
+        vegetablelist = []
+        fruitlist = []
+        for row in rows:
+            if row[0] == 'fish & seafood':
+                fishlist.append(row[1])
+            elif row[0] == 'dairy':
+                dairylist.append(row[1])
+            elif row[0] == 'meat':
+                meatlist.append(row[1])
+            elif row[0] == 'fruit':
+                fruitlist.append(row[1])
+            elif row[0] == 'vegetables':
+                vegetablelist.append(row[1])
+        return fishlist, vegetablelist, dairylist, meatlist, fruitlist
