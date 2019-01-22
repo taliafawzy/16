@@ -247,7 +247,15 @@ def results():
 @app.route("/recipe", methods = ["GET", "POST"])
 def recipe():
     recipe = session['recipe']
-
+    print(recipe)
+    #check if user already saved this recipe for the notsaved flag that is used in the recipe.html
+    notsaved = False
+    if "userid" in session:
+        saved_recipe = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid and recipe = :name", userid = session["userid"], name = recipe["name"])
+        if not saved_recipe:
+            notsaved = True
+        else:
+            notsaved = False
     if request.method == "POST":
         if request.form.get("save_recipe"):
             recipe = save_recipe(recipe)
@@ -259,10 +267,8 @@ def recipe():
             for item in related:
                 url = db.execute("SELECT link FROM cookbook WHERE recipe = :item", item = item)
                 urls.append(url)
-                print(url)
             urls = [url['link'] for url in urls for url in url]
-            print(urls)
             related_zip = zip(related, urls)
-            return render_template("recipe.html", recipe = recipe, related=related, related_zip = related_zip)
+            return render_template("recipe.html", recipe = recipe, related=related, related_zip = related_zip, notsaved = notsaved)
         else:
-            return render_template("recipe.html", recipe = recipe)
+            return render_template("recipe.html", recipe = recipe, notsaved = notsaved)

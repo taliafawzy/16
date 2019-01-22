@@ -6,7 +6,7 @@
 
 {% block main %}
     <form action="{{ url_for('recipe') }}" method="post">
-    {% if session.userid %}
+    {% if session.userid and notsaved %}
         <button class="btn btn-info" name="save_recipe" value="save-recipe" type="submit">Save recipe</button>
     {% endif %}
     <table class="table table-striped" style="width:100%">
