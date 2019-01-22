@@ -31,41 +31,45 @@
       <div class="collapse multi-collapse" id="dairy">
         <div class="card card-body">
           <form action="{{ url_for('results') }}" method="post">
-            <input type="checkbox" name="ingredient" value="milk" id="milk"><label for="milk"> Milk </label>&nbsp
-            <input type="checkbox" name="ingredient" value="cheese" id="cheese"><label for="cheese"> Cheese </label>&nbsp
-            <input type="checkbox" name="ingredient" value="butter" id="butter"><label for="butter"> Butter </label>&nbsp
-            <input type="checkbox" name="ingredient" value="sourcream" id="sourcream"><label for="sourcream"> Sour Cream </label>
+          {% for dair in dairylist %}
+             <input type="checkbox" name="ingredient" value="{{ dair }}" ><label for="{{ dair }}"> {{ dair }} </label>&nbsp
+          {% endfor %}
         </div>
       </div>
     </div>
     <div class="col">
       <div class="collapse multi-collapse" id="meat">
         <div class="card card-body">
-            <input type="checkbox" name="ingredient" value="bacon" id="bacon"><label for="bacon"> Bacon </label>&nbsp
-            <input type="checkbox" name="ingredient" value="beef" id="beef"><label for="beef"> Beef </label>&nbsp
-            <input type="checkbox" name="ingredient" value="chicken" id="chicken"><label for="chicken"> Chicken </label>&nbsp
-            <input type="checkbox" name="ingredient" value="turkey" id="turkey"><label for="turkey"> Turkey </label>
+          {% for meat in meatlist %}
+             <input type="checkbox" name="ingredient" value="{{ meat }}" ><label for="{{ meat }}"> {{ meat }} </label>&nbsp
+          {% endfor %}
         </div>
       </div>
     </div>
       <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample3">
         <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          {% for fish in fishlist %}
+             <input type="checkbox" name="ingredient" value="{{ fish }}" ><label for="{{ fish }}"> {{ fish }} </label>&nbsp
+          {% endfor %}
         </div>
       </div>
     </div>
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample4">
         <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          {% for fruit in fruitlist %}
+             <input type="checkbox" name="ingredient" value="{{ fruit }}" ><label for="{{ fruit }}"> {{ fruit }} </label>&nbsp
+          {% endfor %}
         </div>
       </div>
     </div>
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample5">
         <div class="card card-body">
-          Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.
+          {% for vegetable in vegetablelist %}
+             <input type="checkbox" name="ingredient" value="{{ vegetable }}" ><label for="{{ vegetable }}"> {{ vegetable }} </label>&nbsp
+          {% endfor %}
         </div>
       </div>
     </div>

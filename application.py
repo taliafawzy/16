@@ -7,6 +7,8 @@ from passlib.context import CryptContext
 from helpers import *
 from puppy import *
 
+
+
 # configure application
 app = Flask(__name__)
 
@@ -160,6 +162,8 @@ def mypage():
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
+    fishlist, vegetablelist, dairylist, meatlist, fruitlist = checklist()
+    render_template("homepage.html", fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
     if request.method == "POST":
         if request.form.getlist("ingredient"):
             ingredient = request.form.getlist("ingredient")
@@ -168,7 +172,7 @@ def homepage():
             session['choice'] = ingredient
             return redirect(url_for("results"))
     else:
-        return render_template("homepage.html")
+        return render_template("homepage.html",  fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
 
 #TODO: error if puppy API gives no results
 @app.route("/results", methods = ["GET", "POST"])
