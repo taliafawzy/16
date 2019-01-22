@@ -249,4 +249,16 @@ def recipe():
             recipe = save_recipe(recipe)
             return redirect(url_for("recipe"))
     else:
-        return render_template("recipe.html", recipe = recipe)
+        related = related_recipes(recipe)
+        if related is not None:
+            urls = []
+            for item in related:
+                url = db.execute("SELECT link FROM cookbook WHERE recipe = :item", item = item)
+                urls.append(url)
+                print(url)
+            urls = [url['link'] for url in urls for url in url]
+            print(urls)
+            related_zip = zip(related, urls)
+            return render_template("recipe.html", recipe = recipe, related=related, related_zip = related_zip)
+        else:
+            return render_template("recipe.html", recipe = recipe)
