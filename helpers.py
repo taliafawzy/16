@@ -126,6 +126,7 @@ def related_recipes(recipe):
             # pick two random recipes out of set from recipes
             final_related_recipes = random.sample(set(final_related_recipes), 2)
             return final_related_recipes
+
     else:
         return None
 
