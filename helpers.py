@@ -152,4 +152,5 @@ def checklist():
             elif row[0] == 'vegetables':
                 vegetablelist.append(row[1])
 
-        return fishlist, vegetablelist, dairylist, meatlist, fruitlist
+
+        return sorted(fishlist), sorted(vegetablelist), sorted(dairylist), sorted(meatlist), sorted(fruitlist)
