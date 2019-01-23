@@ -120,7 +120,7 @@ def related_recipes(recipe):
         final_related_recipes = [item for item in related_recipes if item not in recipe]
 
         # pick two random recipes out of set from recipes
-        final_related_recipes = random.sample(set(final_related_recipes), 2)
+        final_related_recipes = random.sample(set(final_related_recipes), 1)
         return final_related_recipes
     else:
         return None
