@@ -100,7 +100,7 @@ def related_recipes(recipe):
     related_users = db.execute("SELECT userid FROM cookbook WHERE recipeid = :recipeid", recipeid = recipeid[0]['id'])
 
     # if any users saved this recipe, check what other recipes they have
-    if len(related_users) != 0:
+    if len(related_users) > 1:
         related_users_list = [x['userid'] for x in related_users]
         related_recipes = []
         for user in related_users_list:
@@ -119,9 +119,13 @@ def related_recipes(recipe):
         # make list out of recipes from all users together minus visited recipe
         final_related_recipes = [item for item in related_recipes if item not in recipe]
 
-        # pick two random recipes out of set from recipes
-        final_related_recipes = random.sample(set(final_related_recipes), 2)
-        return final_related_recipes
+        if len(final_related_recipes) == 1:
+            final_related_recipes = random.sample(set(final_related_recipes), 1)
+            return final_related_recipes
+        else:
+            # pick two random recipes out of set from recipes
+            final_related_recipes = random.sample(set(final_related_recipes), 2)
+            return final_related_recipes
     else:
         return None
 
