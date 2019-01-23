@@ -194,6 +194,7 @@ def homepage():
         return render_template("homepage.html",  fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
 
 #TODO: error if puppy API gives no results
+#TODO: dubbele code in helpersfunctie plaatsen
 @app.route("/results", methods = ["GET", "POST"])
 def results():
 
