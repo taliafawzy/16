@@ -75,7 +75,7 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
 
-     # forget any user_id
+    # forget any user_id
     session.clear()
 
     # if user reached route via POST (as by submitting a form via POST)
@@ -121,8 +121,6 @@ def register():
         db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
 
-
-
         return redirect(url_for("homepage"))
 
     else:
@@ -132,6 +130,7 @@ def register():
 @login_required
 def mypage():
 
+    # query database to see what user is visiting their page and retrieve their data
     user = db.execute("SELECT username FROM userdata WHERE id = :id", id = session["userid"])
     user = user[0]["username"]
     portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
@@ -139,52 +138,83 @@ def mypage():
     saved = portfolio[0]["saved"]
     rated = portfolio[0]["rated"]
 
+    # query database to retrieve cookbook from user
     cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
+    # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
+        # TODO: RATING SYSTEM
         if "rated" in request.form:
             rating = db.execute("SELECT rating FROM cookbook WHERE rated = :rated AND userid = :userid", rated = request.form.get("rated"), userid = session["userid"])
             rating = personal_rating(rating)
 
+        # if user clicks on tried button
         if "tried" in request.form:
+            # store the tried button that is being clicked on
             recipe = request.form.get("tried")
-            #recipe = db.execute("SELECT recipe FROM cookbook WHERE tried = :tried AND userid = :userid", tried = request.form.get("tried"), userid = session["userid"])
-            #print(recipe)
+
+            # use helpersfunction to update database
             recipe = tried_recipe(recipe)
+
+            # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
             return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
 
+    # else if user reached route via GET (as by clicking a link or via redirect)
     else:
-
         return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
+
+@app.route("/", methods = ["GET"])
+@app.route("/index", methods = ["GET"])
+def root():
+    return redirect(url_for("homepage"))
+
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
+
     fishlist, vegetablelist, dairylist, meatlist, fruitlist = checklist()
     render_template("homepage.html", fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
+
+    # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
+
+        # check what checkboxes are marked
         if request.form.getlist("ingredient"):
             ingredient = request.form.getlist("ingredient")
+
+            # get results from helpersfunction
             recipelist = getResults(ingredient)
+
+            # store recipelist in session
             session['recipelist'] = recipelist
+
+            # store choice of ingredients in session
             session['choice'] = ingredient
+
             return redirect(url_for("results"))
+
+    # else if user reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("homepage.html",  fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
 
 #TODO: error if puppy API gives no results
+#TODO: dubbele code in helpersfunctie plaatsen
 @app.route("/results", methods = ["GET", "POST"])
 def results():
+
     if request.referrer and request.referrer.endswith("homepage"):
         recipelist = session['recipelist']
-        #we need choice to display the person what ingredients they chose on previous page
+
+        # display the person's choice on ingredients they chose on previous page
         choice = session['choice']
         choice = ','.join(choice)
         recipes = []
         ingredientsSet = set()
-        #we create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
+
+        # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
         for recipe in recipelist:
             recipeDict = dict.fromkeys(['name', 'picture', 'url'])
             recipeDict['name'] = recipe.strip()
@@ -198,33 +228,51 @@ def results():
 
             recipes.append(recipeDict)
 
+            # check if shown recipes are already in recipe database, if not store them
             recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
             if len(recipeDatabase) == 0:
                 db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
+
+        # store list of recipes in session
         session['recipes'] = recipes
 
         return render_template("results.html", choice=choice, recipes = recipes, ingredientsSet = ingredientsSet)
+
+    # if user reached route via POST (as by submitting a form via POST)
     elif request.referrer and request.referrer.endswith("results") and request.method == "POST":
+
+        # if user clicks on recipe
         if  "submit_button" in request.form:
-            #get the recipeName from the form that was just submitted
+
+            # get the recipeName from the form that was just submitted
             recipeName = request.form['submit_button']
-            #get the saved recipes list
+
+            # get the saved recipes list
             recipes = session['recipes']
-            #locate our recipe
+
+            # locate our recipe
             recipe = next(item for item in recipes if item["name"] == recipeName)
+
+            # store recipe in session
             session['recipe'] = recipe
+
             return redirect(url_for("recipe"))
+
+        # if user clicks on extra ingredient
         elif "extra_ingredient_submit_button" in request.form:
-            #get previous choice and update it
+
+            # get previous choice and update it
             choice = session['choice']
             newChoice = request.form['extra_ingredient_submit_button']
             choice.append(newChoice)
             session['choice'] = choice
-            #get new ingredients
+
+            # get new ingredients
             recipelist = getResults(choice)
             recipes = []
             ingredientsSet = set()
-            #we create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
+
+            # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
             for recipe in recipelist:
                 recipeDict = dict.fromkeys(['name', 'picture', 'url'])
                 recipeDict['name'] = recipe.strip()
@@ -236,10 +284,13 @@ def results():
                 recipeDict['url'] = recipelist[recipe]["url"]
                 recipes.append(recipeDict)
 
+                # check if shown recipes are already in recipe database, if not store them
                 recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
                 if len(recipeDatabase) == 0:
                     db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
-                session['recipes'] = recipes
+
+            # store list of recipes in session
+            session['recipes'] = recipes
 
             return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
 
@@ -248,11 +299,45 @@ def results():
 
 @app.route("/recipe", methods = ["GET", "POST"])
 def recipe():
+    # retrieve recipe that was previously stored in session
     recipe = session['recipe']
 
+    # check if user already saved this recipe for the notsaved flag that is used in the recipe.html
+    notsaved = False
+    if "userid" in session:
+        saved_recipe = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid and recipe = :name", userid = session["userid"], name = recipe["name"])
+        if not saved_recipe:
+            notsaved = True
+        else:
+            notsaved = False
+
+    # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
+
+
         if request.form.get("save_recipe"):
             recipe = save_recipe(recipe)
             return redirect(url_for("recipe"))
+
+    # else if user reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("recipe.html", recipe = recipe)
+
+        # check if there are recipes related to recipe that is visited
+        related = related_recipes(recipe)
+
+        # if there are related recipes, retrieve url from recipe
+        if related is not None:
+            urls = []
+            for item in related:
+                url = db.execute("SELECT link FROM cookbook WHERE recipe = :item", item = item)
+                urls.append(url)
+            urls = [url['link'] for url in urls for url in url]
+
+            # zip name of recipenames and recipe urls into one list
+            related_zip = zip(related, urls)
+
+            return render_template("recipe.html", recipe = recipe, related=related, related_zip = related_zip, notsaved = notsaved)
+
+        # if there are no related recipes, no related recipes table is shown
+        else:
+            return render_template("recipe.html", recipe = recipe, notsaved = notsaved)

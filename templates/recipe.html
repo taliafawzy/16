@@ -6,7 +6,7 @@
 
 {% block main %}
     <form action="{{ url_for('recipe') }}" method="post">
-    {% if session.userid %}
+    {% if session.userid and notsaved %}
         <button class="btn btn-info" name="save_recipe" value="save-recipe" type="submit">Save recipe</button>
     {% endif %}
     <table class="table table-striped" style="width:100%">
@@ -24,7 +24,18 @@
         <td><a href="{{recipe.url}}">{{recipe.url}}</a></td>
         <td>{{recipe.ingredients}}</td>
     </tr>
-
-</table>
-
+    </table>
+    {% if related %}
+        <table class="table table-striped" style="width:100%">
+        <tr>
+            Users that saved {{recipe.name}} also tried
+        </tr>
+        {% for recipe, url in related_zip %}
+            <tr>
+                <td>{{recipe}}</td>
+                <td><a href="{{url}}">{{url}}</a></td>
+                </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
 {% endblock %}

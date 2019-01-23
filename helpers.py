@@ -93,21 +93,53 @@ def common_rating(single_rating):
 
 def related_recipes(recipe):
     """Returns recipes that were also saved by people who saved visited recipe."""
+    # get recipeid from recipe that is being visited
+    recipeid = db.execute("SELECT id FROM recipe WHERE recipe = :recipe", recipe = recipe['name'])
 
-    recipeid = db.execute("SELECT id FROM recipe WHERE recipe = :recipe", recipe = recipe)
-    related_users = db.execute("SELECT userid FROM cookbook WHERE recipeid = :recipeid", recipeid = recipeid)
-    related_recipes_from_users = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid", userid = related_users)
+    # check what users stored this recipe in cookbook
+    related_users = db.execute("SELECT userid FROM cookbook WHERE recipeid = :recipeid", recipeid = recipeid[0]['id'])
 
-    random.sample(set(related_recipes_from_users), 2)
+    # if any users saved this recipe, check what other recipes they have
+    if len(related_users) != 0:
+        related_users_list = [x['userid'] for x in related_users]
+        related_recipes = []
+        for user in related_users_list:
+            related_recipes_from_users = db.execute("SELECT recipe FROM cookbook WHERE userid = :userid", userid = user)
+            related_recipes.append(related_recipes_from_users)
+
+        # make list out of recipes from all users together
+        related_recipes = [x['recipe'] for x in related_recipes for x in x]
+
+        # make name of visited recipe into string and place into empty list
+        recipename = []
+        for letter in recipe['name']:
+             recipename.append(letter)
+        recipe = ''.join(recipename)
+
+        # make list out of recipes from all users together minus visited recipe
+        final_related_recipes = [item for item in related_recipes if item not in recipe]
+
+        # pick two random recipes out of set from recipes
+        final_related_recipes = random.sample(set(final_related_recipes), 2)
+        return final_related_recipes
+    else:
+        return None
 
 def checklist():
+    # open csv file to retrieve data
     with open('ingredientslist.csv', newline='') as csvfile:
+
+        # seperate data in rows
         rows = csv.reader(csvfile, delimiter=',')
+
+        # create empty list for every category
         fishlist = []
         meatlist = []
         dairylist = []
         vegetablelist = []
         fruitlist = []
+
+        # check category and store ingredient in correct categorylist
         for row in rows:
             if row[0] == 'fish & seafood':
                 fishlist.append(row[1])
@@ -119,4 +151,5 @@ def checklist():
                 fruitlist.append(row[1])
             elif row[0] == 'vegetables':
                 vegetablelist.append(row[1])
+
         return fishlist, vegetablelist, dairylist, meatlist, fruitlist
