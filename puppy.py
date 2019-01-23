@@ -7,7 +7,7 @@ class Puppy(object):
     def search_recipe(self, query="chicken"):
         if isinstance(query,list):
             query = ','.join(query)
-        url = 'http://www.recipepuppy.com/api/?i=' + query + '&p=6'
+        url = 'http://www.recipepuppy.com/api/?i=' + query + '&p=1'
 
         r = requests.get(url)
         results = r.json()["results"]
