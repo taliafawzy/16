@@ -1,77 +1,60 @@
 category,name
 dairy,butter
 dairy,egg
+dairy,egg whites
 dairy,milk
-dairy,parmesan
-dairy,cheddar
+dairy,parmesan cheese
+dairy,cheddar cheese
 dairy,american cheese
+dairy,monterey jack cheese
 dairy,sour cream
 dairy,cream cheese
-dairy,mozzarella
+dairy,mozzarella cheese
 dairy,yogurt
+dairy,greek yogurt
+dairy,cream cheese
 dairy,cream
 dairy,evaporated milk
 dairy,whipped cream
 dairy,half and half
-dairy,feta
+dairy,feta cheese
 dairy,monterey jack cheese
 dairy,condensed milk
 dairy,cottage cheese
 dairy,ice cream
 dairy,swiss cheese
-dairy,velveeta
+dairy,velveeta cheese
 dairy,frosting
 dairy,buttermilk
-dairy,ricotta
+dairy,ricotta cheese
 dairy,goat cheese
-dairy,provolone
-dairy,blue cheese
+dairy,provolone cheese
+dairy,gorgonzola cheese
 dairy,powdered milk
 dairy,colby cheese
-dairy,pepper jack
-dairy,italian cheese
-dairy,soft cheese
-dairy,gouda
-dairy,pepperjack cheese
-dairy,romano
-dairy,brie
-dairy,pizza cheese
-dairy,ghee
-dairy,creme fraiche
+dairy,pepper jack cheese
+dairy,mascarpone cheese
+dairy,cheese spread
+dairy,gouda cheese
+dairy,romano cheese
+dairy,brie cheese
 dairy,cheese soup
-dairy,gruyere
-dairy,pecorino cheese
+dairy,processed cheese
+dairy,gruyere cheese
+dairy,pecorino
 dairy,custard
-dairy,muenster
-dairy,queso fresco cheese
-dairy,hard cheese
+dairy,muenster cheese
+dairy,queso fresco
 dairy,havarti cheese
-dairy,asiago
-dairy,mascarpone
-dairy,neufchatel
-dairy,halloumi
-dairy,paneer
-dairy,brick cheese
-dairy,camembert cheese
-dairy,goat milk
-dairy,garlic herb cheese
+dairy,asiago cheese
+dairy,neufchatel cheese
 dairy,edam cheese
-dairy,manchego
-dairy,fontina
+dairy,manchego cheese
+dairy,fontina cheese
 dairy,stilton cheese
-dairy,emmenthaler cheese
-dairy,red leicester cheese
-dairy,jarlsberg cheese
-dairy,bocconcini cheese
-dairy,farmer cheese
-dairy,creme de cassis
-dairy,wensleydale cheese
-dairy,longhorn cheese
-dairy,double gloucester cheese
-dairy,raclette cheese
-dairy,lancashire cheese
-dairy,cheshire cheese
-vegetables,onion
+dairy,bocconcini
+dairy,margarine
+vegetables,onions
 vegetables,garlic
 vegetables,tomato
 vegetables,potato
@@ -85,29 +68,27 @@ vegetables,spinach
 vegetables,mushroom
 vegetables,green beans
 vegetables,ginger
-vegetables,chili pepper
+vegetables,red chilies
+vegetables,jalapeno
 vegetables,celery
 vegetables,rosemary
 vegetables,salad greens
-vegetables,red onion
+vegetables,red onions
 vegetables,cucumber
 vegetables,sweet potato
 vegetables,pickle
 vegetables,avocado
 vegetables,zucchini
 vegetables,cilantro
-vegetables,frozen vegetables
 vegetables,olive
 vegetables,asparagus
 vegetables,cabbage
 vegetables,cauliflower
 vegetables,dill
 vegetables,kale
-vegetables,mixed vegetable
-vegetables,pumpkin
 vegetables,squash
 vegetables,mint
-vegetables,scallion
+vegetables,chives
 vegetables,sun dried tomato
 vegetables,shallot
 vegetables,eggplant
@@ -115,245 +96,145 @@ vegetables,beet
 vegetables,butternut squash
 vegetables,horseradish
 vegetables,leek
-vegetables,caper
+vegetables,capers
 vegetables,brussels sprout
-vegetables,artichoke heart
-vegetables,chia seeds
 vegetables,radish
 vegetables,sauerkraut
 vegetables,artichoke
-vegetables,portobello mushroom
 vegetables,sweet pepper
 vegetables,arugula
 vegetables,spaghetti squash
-vegetables,capsicum
 vegetables,bok choy
 vegetables,parsnip
 vegetables,okra
 vegetables,yam
 vegetables,fennel
 vegetables,turnip
-vegetables,snow peas
+vegetables,portabella mushrooms
 vegetables,bean sprouts
-vegetables,seaweed
-vegetables,chard
-vegetables,collard
-vegetables,canned tomato
-vegetables,pimiento
+vegetables,swiss chard
+vegetables,collard greens
 vegetables,watercress
 vegetables,tomatillo
-vegetables,rocket
 vegetables,mustard greens
-vegetables,bamboo shoot
+vegetables,bamboo shoots
 vegetables,rutabaga
 vegetables,endive
-vegetables,broccoli rabe
 vegetables,jicama
 vegetables,kohlrabi
 vegetables,hearts of palm
-vegetables,butternut
-vegetables,celery root
-vegetables,daikon
-vegetables,radicchio
-vegetables,porcini
-vegetables,chinese broccoli
-vegetables,jerusalem artichoke
-vegetables,cress
-vegetables,water chestnut
-vegetables,dulse
-vegetables,micro greens
-vegetables,burdock
+vegetables,daikon radish
+vegetables,spring onion
+vegetables,romaine lettuce
+vegetables,cherry tomato
+vegetables,chinese cabbage
+vegetables,waterchestnuts
 vegetables,chayote
+vegetables,mesclun
 fruit,lemon
 fruit,apple
 fruit,banana
+fruit,strawberries
+fruit,blueberries
+fruit,raspberries
+fruit,cranberries
+fruit,clementines
 fruit,lime
-fruit,strawberry
+fruit,kumquats
+fruit,boysenberries
+fruit,crabapple
+fruit,prune
 fruit,orange
 fruit,pineapple
-fruit,blueberry
 fruit,raisin
 fruit,coconut
-fruit,grape
+fruit,mandarin orange
 fruit,peach
-fruit,raspberry
-fruit,cranberry
 fruit,mango
 fruit,pear
-fruit,blackberry
+fruit,asian pear
 fruit,cherry
-fruit,date
 fruit,watermelon
 fruit,berries
 fruit,kiwi
 fruit,grapefruit
-fruit,mandarin
 fruit,craisins
 fruit,cantaloupe
 fruit,plum
 fruit,apricot
-fruit,clementine
-fruit,prunes
 fruit,apple butter
 fruit,pomegranate
 fruit,nectarine
-fruit,fig
 fruit,tangerine
-fruit,papaya
 fruit,rhubarb
-fruit,sultanas
 fruit,plantain
-fruit,currant
 fruit,passion fruit
-fruit,guava
 fruit,persimmons
-fruit,lychee
-fruit,lingonberry
-fruit,tangelos
-fruit,kumquat
-fruit,boysenberry
 fruit,star fruit
-fruit,quince
-fruit,honeydew
-fruit,crabapples
-meat,chicken breast
+meat,chicken
 meat,ground beef
-meat,bacon
 meat,sausage
-meat,beef steak
+meat,turkey sausage
+meat,ham hock
+meat,steak
 meat,ham
-meat,hot dog
+meat,hot dogs
+meat,burgers
+meat,smoked ham
 meat,pork chops
-meat,chicken thighs
-meat,ground turkey
-meat,cooked chicken
 meat,turkey
 meat,pork
 meat,pepperoni
-meat,whole chicken
-meat,chicken leg
+meat,ground venison
 meat,ground pork
-meat,chorizo
-meat,chicken wings
-meat,beef roast
-meat,polish sausage
 meat,salami
-meat,pork roast
-meat,ground chicken
 meat,pork ribs
 meat,spam
 meat,venison
-meat,pork shoulder
 meat,bologna
 meat,bratwurst
 meat,prosciutto
 meat,lamb
 meat,corned beef
-meat,chicken roast
-meat,lamb chops
 meat,pancetta
 meat,ground lamb
-meat,beef ribs
+meat,ribs
 meat,duck
 meat,pork belly
-meat,beef liver
+meat,liver
 meat,leg of lamb
 meat,canadian bacon
-meat,beef shank
 meat,veal
-meat,chicken giblets
 meat,cornish hen
-meat,lamb shoulder
 meat,lamb shank
-meat,deer
 meat,ground veal
 meat,pastrami
 meat,rabbit
-meat,sliced turkey
-meat,pork loin
-meat,elk
-meat,beef suet
-meat,veal cutlet
-meat,lamb loin
-meat,marrow bones
 meat,goose
 meat,chicken tenders
 meat,veal chops
 meat,quail
-meat,oxtail
 meat,pheasant
-meat,lamb liver
-meat,moose
-meat,turkey liver
 meat,pork liver
-meat,veal shank
-meat,foie gras
-meat,beef sirloin
-meat,liver sausage
-meat,sweetbread
-meat,wild boar
-meat,snail
-meat,pigeon
-meat,duck liver
-meat,goose liver
-meat,grouse
-meat,ostrich
-meat,soppressata
-meat,alligator
-fish & seafood,canned tuna
 fish & seafood,salmon
-fish & seafood,tilapia
 fish & seafood,fish fillets
 fish & seafood,cod
-fish & seafood,canned salmon
-fish & seafood,anchovy
-fish & seafood,smoked salmon
 fish & seafood,sardines
-fish & seafood,tuna steak
-fish & seafood,whitefish
-fish & seafood,halibut
+fish & seafood,tuna
 fish & seafood,trout
-fish & seafood,haddock
 fish & seafood,flounder
 fish & seafood,catfish
 fish & seafood,mahi mahi
-fish & seafood,mackerel
-fish & seafood,sole
 fish & seafood,sea bass
 fish & seafood,red snapper
 fish & seafood,swordfish
-fish & seafood,pollock
-fish & seafood,herring
-fish & seafood,perch
-fish & seafood,grouper
+fish & seafood,crab meat
+fish & seafood,lobster meat
 fish & seafood,caviar
 fish & seafood,monkfish
-fish & seafood,rockfish
-fish & seafood,lemon sole
-fish & seafood,pike
-fish & seafood,barramundi
-fish & seafood,eel
-fish & seafood,bluefish
-fish & seafood,carp
-fish & seafood,cuttlefish
-fish & seafood,pompano
-fish & seafood,arctic char
-fish & seafood,john dory
-fish & seafood,marlin
-fish & seafood,amberjack
-fish & seafood,sturgeon
 fish & seafood,shrimp
-fish & seafood,crab
-fish & seafood,prawns
-fish & seafood,scallop
 fish & seafood,clam
-fish & seafood,lobster
-fish & seafood,mussel
 fish & seafood,oyster
 fish & seafood,squid
-fish & seafood,calamari
 fish & seafood,crawfish
 fish & seafood,octopus
-fish & seafood,cockle
-fish & seafood,conch
-fish & seafood,sea urchin
