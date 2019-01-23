@@ -188,13 +188,17 @@ def homepage():
             # get results from helpersfunction
             recipelist = getResults(ingredient)
 
-            # store recipelist in session
-            session['recipelist'] = recipelist
+            if len(recipelist) == 0:
+                return apology("No recipes found")
 
-            # store choice of ingredients in session
-            session['choice'] = ingredient
+            else:
+                # store recipelist in session
+                session['recipelist'] = recipelist
 
-            return redirect(url_for("results"))
+                # store choice of ingredients in session
+                session['choice'] = ingredient
+
+                return redirect(url_for("results"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
@@ -272,33 +276,35 @@ def results():
 
             # get new ingredients
             recipelist = getResults(choice)
-            recipes = []
-            ingredientsSet = set()
+            if len(recipelist) == 0:
+                return apology("No recipes found")
+            else:
+                recipes = []
+                ingredientsSet = set()
 
-            # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
-            for recipe in recipelist:
-                recipeDict = dict.fromkeys(['name', 'picture', 'url'])
-                recipeDict['name'] = recipe.strip()
-                ingredient = (recipelist[recipe]["ingredients"]).split(',')
+                # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
+                for recipe in recipelist:
+                    recipeDict = dict.fromkeys(['name', 'picture', 'url'])
+                    recipeDict['name'] = recipe.strip()
+                    ingredient = (recipelist[recipe]["ingredients"]).split(',')
 
-                nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
-                print(nonChoice, choice)
-                ingredientsSet = nonChoice
+                    nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
+                    ingredientsSet = nonChoice
 
-                recipeDict['picture'] = recipelist[recipe]["picture"]
-                recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
-                recipeDict['url'] = recipelist[recipe]["url"]
-                recipes.append(recipeDict)
+                    recipeDict['picture'] = recipelist[recipe]["picture"]
+                    recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
+                    recipeDict['url'] = recipelist[recipe]["url"]
+                    recipes.append(recipeDict)
 
-                # check if shown recipes are already in recipe database, if not store them
-                recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
-                if len(recipeDatabase) == 0:
-                    db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
+                    # check if shown recipes are already in recipe database, if not store them
+                    recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
+                    if len(recipeDatabase) == 0:
+                        db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
 
-            # store list of recipes in session
-            session['recipes'] = recipes
+                # store list of recipes in session
+                session['recipes'] = recipes
 
-            return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
+                return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
 
 
 
