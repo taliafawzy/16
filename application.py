@@ -190,10 +190,12 @@ def results():
             recipeDict['name'] = recipe.strip()
             ingredient = (recipelist[recipe]["ingredients"]).split(',')
             for food in ingredient:
-                ingredientsSet.add(food.strip())
+                if food.strip() != choice:
+                    ingredientsSet.add(food.strip())
             recipeDict['picture'] = recipelist[recipe]["picture"]
             recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
             recipeDict['url'] = recipelist[recipe]["url"]
+
             recipes.append(recipeDict)
 
             recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
