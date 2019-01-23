@@ -166,8 +166,15 @@ def mypage():
     else:
         return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
 
+@app.route("/", methods = ["GET"])
+@app.route("/index", methods = ["GET"])
+def root():
+    return redirect(url_for("homepage"))
+
+
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
+
     fishlist, vegetablelist, dairylist, meatlist, fruitlist = checklist()
     render_template("homepage.html", fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
 
