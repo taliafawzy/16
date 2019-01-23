@@ -126,13 +126,20 @@ def related_recipes(recipe):
         return None
 
 def checklist():
+    # open csv file to retrieve data
     with open('ingredientslist.csv', newline='') as csvfile:
+
+        # seperate data in rows
         rows = csv.reader(csvfile, delimiter=',')
+
+        # create empty list for every category
         fishlist = []
         meatlist = []
         dairylist = []
         vegetablelist = []
         fruitlist = []
+
+        # check category and store ingredient in correct categorylist
         for row in rows:
             if row[0] == 'fish & seafood':
                 fishlist.append(row[1])
@@ -144,4 +151,5 @@ def checklist():
                 fruitlist.append(row[1])
             elif row[0] == 'vegetables':
                 vegetablelist.append(row[1])
+
         return fishlist, vegetablelist, dairylist, meatlist, fruitlist
