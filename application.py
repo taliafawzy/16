@@ -219,9 +219,11 @@ def results():
             recipeDict = dict.fromkeys(['name', 'picture', 'url'])
             recipeDict['name'] = recipe.strip()
             ingredient = (recipelist[recipe]["ingredients"]).split(',')
-            for food in ingredient:
-                if food.strip() != choice:
-                    ingredientsSet.add(food.strip())
+
+            nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
+            print(nonChoice, choice)
+            ingredientsSet = nonChoice
+
             recipeDict['picture'] = recipelist[recipe]["picture"]
             recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
             recipeDict['url'] = recipelist[recipe]["url"]
@@ -266,6 +268,7 @@ def results():
             newChoice = request.form['extra_ingredient_submit_button']
             choice.append(newChoice)
             session['choice'] = choice
+            print(choice)
 
             # get new ingredients
             recipelist = getResults(choice)
@@ -277,9 +280,11 @@ def results():
                 recipeDict = dict.fromkeys(['name', 'picture', 'url'])
                 recipeDict['name'] = recipe.strip()
                 ingredient = (recipelist[recipe]["ingredients"]).split(',')
-                for food in ingredient:
-                    if food.strip() != choice:
-                        ingredientsSet.add(food.strip())
+
+                nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
+                print(nonChoice, choice)
+                ingredientsSet = nonChoice
+
                 recipeDict['picture'] = recipelist[recipe]["picture"]
                 recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
                 recipeDict['url'] = recipelist[recipe]["url"]
