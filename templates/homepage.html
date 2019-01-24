@@ -30,6 +30,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="dairy">
         <div class="card card-body">
+          <div><h3>Dairy</h3></div>
           <form action="{{ url_for('results') }}" method="post">
           {% for dair in dairylist %}
              <input type="checkbox" name="ingredient" value="{{ dair }}" ><label for="{{ dair }}"> {{ dair }} </label>&nbsp
@@ -40,6 +41,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="meat">
         <div class="card card-body">
+          <div><h3>Meat</h3></div>
           {% for meat in meatlist %}
              <input type="checkbox" name="ingredient" value="{{ meat }}" ><label for="{{ meat }}"> {{ meat }} </label>&nbsp
           {% endfor %}
@@ -49,6 +51,7 @@
       <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample3">
         <div class="card card-body">
+          <div><h3>Fish & Seafood</h3></div>
           {% for fish in fishlist %}
              <input type="checkbox" name="ingredient" value="{{ fish }}" ><label for="{{ fish }}"> {{ fish }} </label>&nbsp
           {% endfor %}
@@ -58,6 +61,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample4">
         <div class="card card-body">
+          <div><h3>Fruit</h3></div>
           {% for fruit in fruitlist %}
              <input type="checkbox" name="ingredient" value="{{ fruit }}" ><label for="{{ fruit }}"> {{ fruit }} </label>&nbsp
           {% endfor %}
@@ -67,6 +71,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample5">
         <div class="card card-body">
+          <div><h3>Vegetables</h3></div>
           {% for vegetable in vegetablelist %}
              <input type="checkbox" name="ingredient" value="{{ vegetable }}" ><label for="{{ vegetable }}"> {{ vegetable }} </label>&nbsp
           {% endfor %}
