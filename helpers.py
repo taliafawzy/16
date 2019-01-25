@@ -58,6 +58,16 @@ def tried_recipe(recipe):
 
     return tried
 
+def delete_recipe(recipe):
+
+    # delete recipe from cookbook
+    db.execute("DELETE FROM cookbook WHERE recipe = :recipe AND userid = :userid", recipe = recipe, userid = session["userid"])
+
+    # update amount of recipes saved in portfolio
+    db.execute("UPDATE portfolio SET saved = saved - 1 WHERE userid = :userid", userid = session["userid"])
+
+    return delete_recipe
+
 def save_recipe(recipe):
     """Updates amount of recipes saved in portfolio and inserts recipe into cookbook."""
 

@@ -169,10 +169,20 @@ def mypage():
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # TODO: RATING SYSTEM
-        if "rated" in request.form:
-            rating = db.execute("SELECT rating FROM cookbook WHERE rated = :rated AND userid = :userid", rated = request.form.get("rated"), userid = session["userid"])
-            rating = personal_rating(rating)
+        # if user clicks on delete button
+        if "delete" in request.form:
+
+            # store the delete button that is being clicked on
+            recipe = request.form.get("delete")
+
+            # use helpersfunction to update database
+            recipe = delete_recipe(recipe)
+
+            # render updated cookbook
+            cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
+
+            return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
+
 
         # if user clicks on tried button
         if "tried" in request.form:
@@ -185,11 +195,11 @@ def mypage():
             # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
-            return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
+            return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("mypage.html", user = user, tried = tried, saved = saved, rated =rated, cookbook=cookbook)
+        return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
 
 @app.route("/", methods = ["GET"])
 @app.route("/index", methods = ["GET"])
