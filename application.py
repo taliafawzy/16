@@ -1,5 +1,5 @@
 from cs50 import SQL
-from flask import Flask, flash, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for, jsonify
 from flask_session import Session
 from passlib.apps import custom_app_context as pwd_context
 from tempfile import mkdtemp
@@ -63,6 +63,31 @@ def login():
     else:
         return render_template("login.html")
 
+#@app.route("/testregister")
+#def testregister():
+
+    # redirect user to login form
+ #   return render_template("testregister.html")
+
+@app.route("/checkname", methods = ["GET"])
+def checkname():
+
+    username = request.args.get('name')
+    print(username)
+
+    # query database for username
+    userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=username)
+
+    # ensure username exists and password is correct
+    if len(userdata) == 1:
+        result = "username already exists"
+        return jsonify(result = result)
+    else:
+        result = "username does not exist yet"
+        return jsonify(result=result)
+
+
+
 @app.route("/logout")
 def logout():
 
@@ -82,7 +107,7 @@ def register():
     if request.method == "POST":
 
         # ensure username/pasword/confirmation was submitted
-        if not request.form.get("username"):
+        if not request.form.get("name"):
             return apology("must provide username")
         elif not (request.form.get("password") or request.form.get("confirmation")):
             return apology("must provide password")
@@ -92,7 +117,7 @@ def register():
             return apology("password does not match")
 
         # query database for username
-        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("username"))
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("name"))
 
         # ensure username exists and password is correct
         if len(userdata) == 1:
@@ -103,10 +128,10 @@ def register():
         hash = myctx.hash(request.form.get("password"))
 
         # insert user/password into userdata
-        userdata = db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("username"), hash=hash)
+        userdata = db.execute("INSERT INTO userdata (username, hash) VALUES (:username, :hash)",username=request.form.get("name"), hash=hash)
 
         # query database for username
-        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("username"))
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("name"))
 
         # remember wich user has logged in
         session["userid"] = userdata[0]["id"]

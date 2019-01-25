@@ -47,8 +47,6 @@ def getResults(ingredient):
 
     return recipelist
 
-
-
 def tried_recipe(recipe):
     """Updates amount of recipes tried in portfolio and updates boolean in cookbook."""
 
@@ -74,22 +72,6 @@ def save_recipe(recipe):
     saved_recipe = db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried, rated) VALUES(:userid, :recipeid, :recipe, :link, :tried, :rated)", recipeid = recipeid, recipe = recipe['name'], link = recipe["url"], tried = 0, rated = 0, userid = session["userid"])
 
     return saved_recipe
-
-def personal_rating(rating):
-    """Updates rating of recipe in cookbook."""
-
-    # update rating of recipe in cookbook
-    db.execute("UPDATE cookbook SET rated =:rated WHERE userid = :userid", rated = rating, userid = session["userid"])
-
-    return personal_rating
-
-def common_rating(single_rating):
-    """Updates common rating of a recipe when rated on recipe page."""
-
-    # update rating of recipe in recipe
-    db.execute("UPDATE recipe SET rating = :rating / :people AND people = :people WHERE userid = :userid", rating = rating + single_rating, people=+1, userid = session["userid"])
-
-    return common_rating
 
 def related_recipes(recipe):
     """Returns recipes that were also saved by people who saved visited recipe."""
