@@ -1,7 +1,5 @@
 $(document).ready(function() {
 
-
-
 $('input#name').on('focusout', function () {
     $.getJSON('/checkname', {
       name: $('#name').val(),
@@ -12,4 +10,8 @@ $('input#name').on('focusout', function () {
   });
 
 });
+
+
+
+
 

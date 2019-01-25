@@ -21,19 +21,19 @@
   <p>
     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#dairy" aria-expanded="false" aria-controls="multiCollapseExample1" >Dairy &#9660;</button>
     <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#meat" aria-expanded="false" aria-controls="multiCollapseExample2">Meat&#9660;</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Fish & Seafood&#9660;</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Fruit&#9660;</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5">Vegetables&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#fish" aria-expanded="false" aria-controls="multiCollapseExample3">Fish & Seafood&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#fruit" aria-expanded="false" aria-controls="multiCollapseExample4">Fruit&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#vegetables" aria-expanded="false" aria-controls="multiCollapseExample5">Vegetables&#9660;</button>
   </p>
   </div>
-  <div class="row">
+  <div class="row"">
     <div class="col">
       <div class="collapse multi-collapse" id="dairy">
         <div class="card card-body">
           <div><h3>Dairy&#x1f9c0;</h3></div>
           <form action="{{ url_for('results') }}" method="post">
-          {% for dair in dairylist %}
-             <input type="checkbox" name="ingredient" value="{{ dair }}" ><label for="{{ dair }}"> {{ dair }} </label>&nbsp
+          {% for dairy in dairylist %}
+             <input type="checkbox" name="ingredient" value="{{ dairy }}" ><label for="{{ dairy }}"> {{ dairy }} </label>&nbsp
           {% endfor %}
         </div>
       </div>
@@ -49,7 +49,7 @@
       </div>
     </div>
       <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample3">
+      <div class="collapse multi-collapse" id="fish">
         <div class="card card-body">
           <div><h3>Fish & Seafood&#128031;</h3></div>
           {% for fish in fishlist %}
@@ -59,7 +59,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample4">
+      <div class="collapse multi-collapse" id="fruit">
         <div class="card card-body">
           <div><h3>Fruit&#127823;</h3></div>
           {% for fruit in fruitlist %}
@@ -69,7 +69,7 @@
       </div>
     </div>
     <div class="col">
-      <div class="collapse multi-collapse" id="multiCollapseExample5">
+      <div class="collapse multi-collapse" id="vegetables">
         <div class="card card-body">
           <div><h3>Vegetables&#129382;</h3></div>
           {% for vegetable in vegetablelist %}

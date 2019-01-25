@@ -260,7 +260,6 @@ def results():
             ingredient = (recipelist[recipe]["ingredients"]).split(',')
 
             nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
-            print(nonChoice, choice)
             ingredientsSet = nonChoice
 
             recipeDict['picture'] = recipelist[recipe]["picture"]
