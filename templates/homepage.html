@@ -7,9 +7,8 @@
 {% block main %}
     <form action="{{ url_for('homepage') }}" method="post">
 
-<body>
-
-<center>
+<body background="static/achtergrond.jpg">
+  <center>
     <div class="jumbotron jumbotron-fluid">
   <div class="container">
     <h1 class="display-4">What's in your fridge?</h1>
@@ -20,17 +19,18 @@
     <div class="col-md">
 </div>
   <p>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#dairy" aria-expanded="false" aria-controls="multiCollapseExample1">Dairy</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#meat" aria-expanded="false" aria-controls="multiCollapseExample2">Meat</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Fish & Seafood</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Fruit</button>
-    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5">Vegetables</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#dairy" aria-expanded="false" aria-controls="multiCollapseExample1" >Dairy &#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#meat" aria-expanded="false" aria-controls="multiCollapseExample2">Meat&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">Fish & Seafood&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample4" aria-expanded="false" aria-controls="multiCollapseExample4">Fruit&#9660;</button>
+    <button class="btn btn-success" type="button" data-toggle="collapse" data-target="#multiCollapseExample5" aria-expanded="false" aria-controls="multiCollapseExample5">Vegetables&#9660;</button>
   </p>
   </div>
   <div class="row">
     <div class="col">
       <div class="collapse multi-collapse" id="dairy">
         <div class="card card-body">
+          <div><h3>Dairy&#x1f9c0;</h3></div>
           <form action="{{ url_for('results') }}" method="post">
           {% for dair in dairylist %}
              <input type="checkbox" name="ingredient" value="{{ dair }}" ><label for="{{ dair }}"> {{ dair }} </label>&nbsp
@@ -41,6 +41,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="meat">
         <div class="card card-body">
+          <div><h3>Meat &#127831;</h3></div>
           {% for meat in meatlist %}
              <input type="checkbox" name="ingredient" value="{{ meat }}" ><label for="{{ meat }}"> {{ meat }} </label>&nbsp
           {% endfor %}
@@ -50,6 +51,7 @@
       <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample3">
         <div class="card card-body">
+          <div><h3>Fish & Seafood&#128031;</h3></div>
           {% for fish in fishlist %}
              <input type="checkbox" name="ingredient" value="{{ fish }}" ><label for="{{ fish }}"> {{ fish }} </label>&nbsp
           {% endfor %}
@@ -59,6 +61,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample4">
         <div class="card card-body">
+          <div><h3>Fruit&#127823;</h3></div>
           {% for fruit in fruitlist %}
              <input type="checkbox" name="ingredient" value="{{ fruit }}" ><label for="{{ fruit }}"> {{ fruit }} </label>&nbsp
           {% endfor %}
@@ -68,6 +71,7 @@
     <div class="col">
       <div class="collapse multi-collapse" id="multiCollapseExample5">
         <div class="card card-body">
+          <div><h3>Vegetables&#129382;</h3></div>
           {% for vegetable in vegetablelist %}
              <input type="checkbox" name="ingredient" value="{{ vegetable }}" ><label for="{{ vegetable }}"> {{ vegetable }} </label>&nbsp
           {% endfor %}
@@ -75,7 +79,7 @@
       </div>
     </div>
         <fieldset>
-                <button class="btn btn-info" type="submit">Search!</button>
+                <button class="btn btn-info" type="submit">Search&#128269;</button>
             </div>
         </fieldset>
     </form>
