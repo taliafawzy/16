@@ -40,12 +40,6 @@ def login():
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # ensure pasword and username is submitted
-        if not request.form.get("username"):
-            return apology("must provide username")
-        elif not request.form.get("password"):
-            return apology("must provide password")
-
         # create user database
         userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("username"))
 
@@ -63,17 +57,11 @@ def login():
     else:
         return render_template("login.html")
 
-#@app.route("/testregister")
-#def testregister():
-
-    # redirect user to login form
- #   return render_template("testregister.html")
 
 @app.route("/checkname", methods = ["GET"])
 def checkname():
 
     username = request.args.get('name')
-    print(username)
 
     # query database for username
     userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=username)
@@ -106,15 +94,6 @@ def register():
     # if user reached route via POST (as by submitting a form via POST)
     if request.method == "POST":
 
-        # ensure username/pasword/confirmation was submitted
-        if not request.form.get("name"):
-            return apology("must provide username")
-        elif not (request.form.get("password") or request.form.get("confirmation")):
-            return apology("must provide password")
-
-        # ensure password and passwordcheck match
-        if request.form.get("password") != request.form.get("confirmation"):
-            return apology("password does not match")
 
         # query database for username
         userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username=request.form.get("name"))
@@ -161,7 +140,6 @@ def mypage():
     portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
     tried = portfolio[0]["tried"]
     saved = portfolio[0]["saved"]
-    rated = portfolio[0]["rated"]
 
     # query database to retrieve cookbook from user
     cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
