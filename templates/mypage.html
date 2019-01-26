@@ -19,10 +19,6 @@
         <td>{{tried}}</td>
     </tr>
     <tr>
-        <th>Recipes rated</th>
-        <td>{{rated}}</td>
-    </tr>
-    <tr>
         <th>Recipes saved</th>
         <td>{{saved}}</td>
     </tr>
@@ -34,6 +30,7 @@
         <th>Recipe</th>
         <th>Link</th>
         <th>Tried</th>
+        <th>Delete</th>
       </tr>
 
     {% for recipe in cookbook %}
@@ -51,7 +48,7 @@
             {% endif %}
             <td>
                 <div class="form-group">
-                <button class="btn btn-info" name="delete" value="{{recipe.recipe}}" type="submit">Delete!</button>
+                <button class="btn btn-info" name="delete" value="{{recipe.recipe}}" type="submit">🗑️</button>
                 </div>
             </td>
         </tr>

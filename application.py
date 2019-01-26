@@ -41,7 +41,7 @@ def login():
     if request.method == "POST":
 
         # create user database
-        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("username"))
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("name"))
 
         # ensure username exists and password is correct
         if len(userdata) != 1 or not pwd_context.verify(request.form.get("password"), userdata[0]["hash"]):
