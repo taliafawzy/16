@@ -41,14 +41,16 @@ def login():
     if request.method == "POST":
 
         # create user database
-        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("name"))
+        userdata = db.execute("SELECT * FROM userdata WHERE username = :username", username = request.form.get("username"))
 
         # ensure username exists and password is correct
         if len(userdata) != 1 or not pwd_context.verify(request.form.get("password"), userdata[0]["hash"]):
-            return apology("invalid username and/or password")
+            flash("Wrong username or password")
+            return render_template("login.html")
 
-        # remember which user has logged in
-        session["userid"] = userdata[0]["id"]
+        else:
+            # remember which user has logged in
+            session["userid"] = userdata[0]["id"]
 
         # redirect user to home page
         return redirect(url_for("homepage"))
@@ -100,7 +102,8 @@ def register():
 
         # ensure username exists and password is correct
         if len(userdata) == 1:
-            return apology("username already exists")
+            flash("Username already exists")
+            return render_template("register.html")
 
         # encrypt password
         myctx = CryptContext(schemes=["sha256_crypt"], sha256_crypt__default_rounds=80000)
@@ -184,6 +187,11 @@ def mypage():
 def root():
     return redirect(url_for("homepage"))
 
+@app.route("/homepagenieuw", methods  = ["GET", "POST"])
+def homepagenieuw():
+    fishlist, vegetablelist, dairylist, meatlist, fruitlist = checklist()
+    return render_template("homepagenieuw.html", fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
+
 
 @app.route("/homepage", methods = ["GET", "POST"])
 def homepage():
@@ -196,22 +204,19 @@ def homepage():
 
         # check what checkboxes are marked
         if request.form.getlist("ingredient"):
+
             ingredient = request.form.getlist("ingredient")
 
             # get results from helpersfunction
             recipelist = getResults(ingredient)
 
-            if len(recipelist) == 0:
-                return apology("No recipes found")
+            # store recipelist in session
+            session['recipelist'] = recipelist
 
-            else:
-                # store recipelist in session
-                session['recipelist'] = recipelist
+            # store choice of ingredients in session
+            session['choice'] = ingredient
 
-                # store choice of ingredients in session
-                session['choice'] = ingredient
-
-                return redirect(url_for("results"))
+            return redirect(url_for("results"))
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
