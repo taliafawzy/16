@@ -14,15 +14,16 @@
         <th>Username</th>
         <td>{{user}}</td>
     </tr>
+    {% for data in portfolio %}
     <tr>
         <th>Recipes tried</th>
-        <td>{{tried}}</td>
+        <td>{{data.tried}}</td>
     </tr>
     <tr>
         <th>Recipes saved</th>
-        <td>{{saved}}</td>
+        <td>{{data.saved}}</td>
     </tr>
-
+    {% endfor %}
 </table>
 
 <table class="table table-striped" style="width:100%">
