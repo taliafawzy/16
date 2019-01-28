@@ -73,7 +73,7 @@ Schetsen van website in powerpoint. De volgende pagina's zijn nodig:
 -   recipe.html
 -   mypage.html
 ### Databases
-![](https://github.com/taliafawzy/16/blob/master/databases.PNG)
+![](https://github.com/taliafawzy/16/blob/master/static/databases.PNG)
 
 ## Models/helpers
 -   def apology():
