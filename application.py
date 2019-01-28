@@ -141,8 +141,6 @@ def mypage():
     user = db.execute("SELECT username FROM userdata WHERE id = :id", id = session["userid"])
     user = user[0]["username"]
     portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
-    tried = portfolio[0]["tried"]
-    saved = portfolio[0]["saved"]
 
     # query database to retrieve cookbook from user
     cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
@@ -159,10 +157,13 @@ def mypage():
             # use helpersfunction to update database
             recipe = delete_recipe(recipe)
 
+            # render updated portfolio
+            portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
+
             # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
-            return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
+            return render_template("mypage.html", portfolio = portfolio, cookbook=cookbook)
 
 
         # if user clicks on tried button
@@ -173,14 +174,17 @@ def mypage():
             # use helpersfunction to update database
             recipe = tried_recipe(recipe)
 
+            # render updated portfolio
+            portfolio = db.execute("SELECT * FROM portfolio WHERE userid = :userid", userid = session["userid"])
+
             # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
-            return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
+            return render_template("mypage.html", user = user, portfolio = portfolio, cookbook=cookbook)
 
     # else if user reached route via GET (as by clicking a link or via redirect)
     else:
-        return render_template("mypage.html", user = user, tried = tried, saved = saved, cookbook=cookbook)
+        return render_template("mypage.html", user = user, portfolio = portfolio, cookbook=cookbook)
 
 @app.route("/", methods = ["GET"])
 @app.route("/index", methods = ["GET"])
