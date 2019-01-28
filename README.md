@@ -5,7 +5,9 @@ Het idee is om een website te maken die recepten bij elkaar verzamelt op basis v
 ## Schetsen
 Schetsen van website in powerpoint. De volgende pagina's zijn nodig:
 -   homepage.html
+-   16layout.html
 -   login.html
+-   apology.html
 -   register.html
 -   results.html
 -   recipe.html
@@ -18,27 +20,25 @@ Schetsen van website in powerpoint. De volgende pagina's zijn nodig:
 2. Gebruikers kunnen registreren
 3. Er wordt voor iedere geregistreerde gebruiker een cookbook en portfolio aangemaakt
 4. Gebruikers kunnen uitloggen
-5. Gebruikers kunnen uit een uitvouwmenu recepten aanklikken
+5. Gebruikers kunnen uit een uitvouwmenu ingrediënten aanklikken
 6. Gebruikers krijgen recepten met dit/deze ingrediënt(en) terug
 7. Gebruikers krijgen (naast de recepten) ook andere ingrediënten te zien die vaak gecombineerd worden met het/de gekozen ingrediënt(en)
 8. Gebruikers kunnen deze andere ingrediënten aanklikken en krijgen dan een niewue lijst van recepten terug
 9. Gebruikers kunnen de gegeven recepten aanklikken
 10. Gebruiker kunnen, mits ingelogd, een recept opslaan in hun cookbook
-11. Gebruikers kunnen, mits ingelogd, een recept op de receptpagina waarderen
+11. Gebruikers krijgen bij een aangeklikt recept te zien welke recepten ook zijn opgeslagen door gebruikers die getoonde recept ook in hun cookbook hebben
 12. Gebruikers kunnen op hun profielpagina aangeven of een recept is geprobeerd
-13. Gebruikers kunnen op hun profielpagina een persoonlijke rating aan een recept geven
-14. Opgeslagen recepten worden met naam, link, 'tried' button of 'YES' en wel/geen rating in een tabel op de profielpagina getoond
-15. Op de profielpagina wordt de gebruikersnaam van de gebruiker getoond en wordt bijgehouden hoeveel recepten zijn geprobeerd, gereviewd en opgeslagen
-16. Gebruikers krijgen bij een aangeklikt recept te zien welke recepten ook zijn opgeslagen door gebruikers die getoonde recept ook in hun cookbook hebben
+13. Gebruikers kunnen op hun profielpagina een recept uit hun cookbook verwijderen
+14. Opgeslagen recepten worden met naam, link, 'tried' button of 'YES' en delete button in een tabel op de profielpagina getoond
+15. Op de profielpagina wordt de gebruikersnaam van de gebruiker getoond en wordt bijgehouden hoeveel recepten zijn geprobeerd en opgeslagen
 
 
 ## Minimum viable product
-Gebruikers kunnen via de website zoeken naar recepten met de specifieke ingrediënten die zij aanklikken. Het product laat gebruikers hun favoriete recepten opslaan die zij op hun persoonlijke pagina kunnen bekijken. Ze kunnen daar aangeven of ze het recept hebben geprobeerd en ze kunnen het recept waarderen door middel van het geven van sterren. Ook kunnen ze het recept op de receptpagina een rating geven.
-
+Gebruikers kunnen via de website zoeken naar recepten met de specifieke ingrediënten die zij aanklikken. Het product laat gebruikers hun favoriete recepten opslaan die zij op hun persoonlijke pagina kunnen bekijken. Ze kunnen daar aangeven of ze het recept hebben geprobeerd en ze kunnen het recept eventueel weer verwijderen. Gebruikers worden getipt over andere recepten, doordat zij op de receptpagina krijgen te zien wat gebruikers die het bezochte recept hebben opgeslagen ook hebben opgeslagen.
 ## Afhankelijkheden
 ### Databronnen
-- **Edamam recipe finder**
-https://developer.edamam.com/edamam-recipe-api
+- **Recipe Puppy recipe finder**
+http://www.recipepuppy.com/about/api/
 
 ### Externe Componenten
 - **Bootstrap**
@@ -49,6 +49,8 @@ https://www.phpliteadmin.org/
 http://flask.pocoo.org/
 - **SQLite Databases**
 https://www.sqlite.org/index.html
+- **jQuery**
+https://jquery.com/
 
 
 ### Concurrerende bestaande websites
@@ -63,4 +65,4 @@ Mooie gebruiksvriendelijke layout.
 
 ### Moeilijke delen
 - HTML en CSS layout er mooi en overzichtelijk uit laten zien.
-- Het zoeken van recepten
+- Het zoeken van recepten via de API

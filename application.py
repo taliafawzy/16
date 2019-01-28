@@ -119,13 +119,13 @@ def register():
         session["userid"] = userdata[0]["id"]
 
         # create portfolio
-        db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id))")
+        db.execute("CREATE TABLE if not exists portfolio ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'tried' INTEGER, 'saved' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id))")
 
         # update portfolio
-        db.execute("INSERT INTO portfolio (userid,tried, saved, rated) VALUES(:userid, 0,0,0)", userid = session["userid"])
+        db.execute("INSERT INTO portfolio (userid, tried, saved) VALUES(:userid, 0, 0)", userid = session["userid"])
 
         # create cookbook
-        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'rated' INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN,  INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
 
         return redirect(url_for("homepage"))
@@ -186,11 +186,6 @@ def mypage():
 @app.route("/index", methods = ["GET"])
 def root():
     return redirect(url_for("homepage"))
-
-@app.route("/homepagenieuw", methods  = ["GET", "POST"])
-def homepagenieuw():
-    fishlist, vegetablelist, dairylist, meatlist, fruitlist = checklist()
-    return render_template("homepagenieuw.html", fishlist=fishlist, vegetablelist=vegetablelist, dairylist=dairylist, meatlist=meatlist, fruitlist=fruitlist)
 
 
 @app.route("/homepage", methods = ["GET", "POST"])
@@ -254,7 +249,7 @@ def results():
             # check if shown recipes are already in recipe database, if not store them
             recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
             if len(recipeDatabase) == 0:
-                db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
+                db.execute("INSERT INTO recipe (recipe) VALUES(:recipe)", recipe = recipeDict['name'])
 
         # store list of recipes in session
         session['recipes'] = recipes
@@ -316,7 +311,7 @@ def results():
                     # check if shown recipes are already in recipe database, if not store them
                     recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
                     if len(recipeDatabase) == 0:
-                        db.execute("INSERT INTO recipe (recipe, rating, people) VALUES(:recipe, :rating, :people)", recipe = recipeDict['name'], rating = 0, people = 0)
+                        db.execute("INSERT INTO recipe (recipe) VALUES(:recipe)", recipe = recipeDict['name'])
 
                 # store list of recipes in session
                 session['recipes'] = recipes
