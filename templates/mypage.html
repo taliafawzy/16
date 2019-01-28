@@ -7,7 +7,7 @@
 {% block main %}
     <form action="{{ url_for('mypage') }}" method="post">
     <div>
-        <font size= "6">My recipes:</font>
+        <font size= "6">My recipes &#127859;</font>
     </div>
     <table class="table table-striped">
     <tr>
@@ -36,7 +36,7 @@
     {% for recipe in cookbook %}
         <tr>
             <td>{{recipe.recipe}}</td>
-            <td>{{recipe.link}}</td>
+            <td><a href="url">{{recipe.link}}</a></td>
             {% if recipe.tried == 1 %}
             <td>✔️</td>
             {% else %}
