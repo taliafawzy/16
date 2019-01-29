@@ -11,22 +11,24 @@
     <h2>Do you also have: </h2>
 
         {% for ingredient in ingredientsSet %}
-                <button class="btn btn-info" name="extra_ingredient_submit_button" value="{{ingredient}}" type="submit">{{ingredient}}</button>
+                <button class="btn btn-success" name="extra_ingredient_submit_button" value="{{ingredient}}"  type="submit">{{ingredient}}</button>
 
         {% endfor %}
 
 
     <table class="table table-striped">
+        <tdbody>
         {% for recipe in recipes %}
         <tr>
             <td>
                 <img src="{{recipe.picture}}">
             </td>
             <td>
-                <button class="btn btn-info" name="submit_button" value="{{recipe.name}}" type="submit">{{recipe.name}}</button>
+                <button class="btn btn-success" name="submit_button" value="{{recipe.name}}" type="submit">{{recipe.name}}</button>
             </td>
         </tr>
         {% endfor %}
+        </tdbody>
     </table>
     </form>
 {% endblock %}
