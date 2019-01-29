@@ -30,8 +30,9 @@
         <tr>
             Users that saved {{recipe.name}} also tried
         </tr>
-        {% for recipe, url in related_zip %}
+        {% for recipe, url, image in related_zip %}
             <tr>
+                <td><img src="{{image}}"></td>
                 <td>{{recipe}}</td>
                 <td><a href="{{url}}">{{url}}</a></td>
                 </tr>

@@ -125,7 +125,7 @@ def register():
         db.execute("INSERT INTO portfolio (userid, tried, saved) VALUES(:userid, 0, 0)", userid = session["userid"])
 
         # create cookbook
-        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, 'image' BLOB, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
 
         return redirect(url_for("homepage"))
@@ -231,7 +231,7 @@ def results():
 
         # display the person's choice on ingredients they chose on previous page
         choice = session['choice']
-        choice = ','.join(choice)
+        choice = ', '.join(choice)
         recipes = []
         ingredientsSet = set()
 
@@ -288,7 +288,6 @@ def results():
             newChoice = request.form['extra_ingredient_submit_button']
             choice.append(newChoice)
             session['choice'] = choice
-            print(choice)
 
             # get new ingredients
             recipelist = getResults(choice)
@@ -320,7 +319,7 @@ def results():
                 # store list of recipes in session
                 session['recipes'] = recipes
 
-                return render_template("results.html", choice=','.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
+                return render_template("results.html", choice=', '.join(choice), recipes = recipes, ingredientsSet = ingredientsSet)
 
 
 
@@ -356,13 +355,18 @@ def recipe():
         # if there are related recipes, retrieve url from recipe
         if related is not None:
             urls = []
+            images = []
             for item in related:
                 url = db.execute("SELECT link FROM cookbook WHERE recipe = :item", item = item)
                 urls.append(url)
+                image = db.execute("SELECT image FROM cookbook WHERE recipe = :item", item = item)
+                images.append(image)
             urls = [url['link'] for url in urls for url in url]
+            images = [image['image'] for image in images for image in image]
+
 
             # zip name of recipenames and recipe urls into one list
-            related_zip = zip(related, urls)
+            related_zip = zip(related, urls, images)
 
             return render_template("recipe.html", recipe = recipe, related=related, related_zip = related_zip, notsaved = notsaved)
 
