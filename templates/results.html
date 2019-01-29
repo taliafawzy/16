@@ -8,13 +8,14 @@
     <form action="{{ url_for('results') }}" method="post">
 
     <h1>Recipes that match your choice of {{choice}}</h1>
+    {% if ingredientsSet %}
     <h2>Do you also have: </h2>
 
         {% for ingredient in ingredientsSet %}
                 <button class="btn btn-success" name="extra_ingredient_submit_button" value="{{ingredient}}"  type="submit">{{ingredient}}</button>
 
         {% endfor %}
-
+    {% endif %}
 
     <table class="table table-striped">
         <tdbody>
