@@ -66,6 +66,9 @@ def delete_recipe(recipe):
     # update amount of recipes saved in portfolio
     db.execute("UPDATE portfolio SET saved = saved - 1 WHERE userid = :userid", userid = session["userid"])
 
+    # update amount of recipes tried in portfolio
+    db.execute("UPDATE portfolio SET tried = tried - 1 WHERE userid = :userid", userid = session["userid"])
+
     return delete_recipe
 
 def save_recipe(recipe):
