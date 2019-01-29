@@ -79,7 +79,7 @@ def save_recipe(recipe):
     recipeid = recipeid[0]['id']
 
     # register recipe into cookbook
-    saved_recipe = db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried, rated) VALUES(:userid, :recipeid, :recipe, :link, :tried, :rated)", recipeid = recipeid, recipe = recipe['name'], link = recipe["url"], tried = 0, rated = 0, userid = session["userid"])
+    saved_recipe = db.execute("INSERT INTO cookbook (userid, recipeid, recipe, link, tried) VALUES(:userid, :recipeid, :recipe, :link, :tried)", recipeid = recipeid, recipe = recipe['name'], link = recipe["url"], tried = 0, userid = session["userid"])
 
     return saved_recipe
 
@@ -101,6 +101,7 @@ def related_recipes(recipe):
 
         # make list out of recipes from all users together
         related_recipes = [x['recipe'] for x in related_recipes for x in x]
+        print(related_recipes)
 
         # make name of visited recipe into string and place into empty list
         recipename = []

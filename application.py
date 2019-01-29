@@ -125,7 +125,7 @@ def register():
         db.execute("INSERT INTO portfolio (userid, tried, saved) VALUES(:userid, 0, 0)", userid = session["userid"])
 
         # create cookbook
-        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN,  INTEGER, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
+        db.execute("CREATE TABLE if not exists cookbook ('id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, 'userid' INTEGER, 'recipeid' INTEGER, 'recipe' TEXT, 'link' TEXT, 'tried' BOOLEAN, FOREIGN KEY(userid) REFERENCES userdata(id), FOREIGN KEY(recipeid) REFERENCES recipe(id))")
 
 
         return redirect(url_for("homepage"))
