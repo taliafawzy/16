@@ -163,7 +163,7 @@ def mypage():
             # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
-            return render_template("mypage.html", portfolio = portfolio, cookbook=cookbook)
+            return render_template("mypage.html", user=user, portfolio = portfolio, cookbook=cookbook)
 
 
         # if user clicks on tried button
