@@ -127,7 +127,7 @@ main td
 
 .background
 {
-  background-image: url("achtergrond.jpg")
+  background-image: url("achtergrond.jpg");
   height: 100%;
   background-position: center;
   background-repeat: no-repeat;
