@@ -163,7 +163,7 @@ def mypage():
             # render updated cookbook
             cookbook = db.execute("SELECT * FROM cookbook WHERE userid = :userid", userid = session["userid"])
 
-            return render_template("mypage.html", portfolio = portfolio, cookbook=cookbook)
+            return render_template("mypage.html", user=user, portfolio = portfolio, cookbook=cookbook)
 
 
         # if user clicks on tried button
@@ -229,36 +229,40 @@ def results():
     if request.referrer and request.referrer.endswith("homepage"):
         recipelist = session['recipelist']
 
-        # display the person's choice on ingredients they chose on previous page
-        choice = session['choice']
-        choice = ', '.join(choice)
-        recipes = []
-        ingredientsSet = set()
+        if len(recipelist) == 0 or len(recipelist) > 20:
+            flash("No recipes found")
+            return redirect(url_for("homepage"))
+        else:
+            # display the person's choice on ingredients they chose on previous page
+            choice = session['choice']
+            choice = ', '.join(choice)
+            recipes = []
+            ingredientsSet = set()
 
-        # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
-        for recipe in recipelist:
-            recipeDict = dict.fromkeys(['name', 'picture', 'url'])
-            recipeDict['name'] = recipe.strip()
-            ingredient = (recipelist[recipe]["ingredients"]).split(',')
+            # create a list of dictionaries (1 recipe 1 dictionary) to make a table with images and recipes
+            for recipe in recipelist:
+                recipeDict = dict.fromkeys(['name', 'picture', 'url'])
+                recipeDict['name'] = recipe.strip()
+                ingredient = (recipelist[recipe]["ingredients"]).split(',')
 
-            nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
-            ingredientsSet = nonChoice
+                nonChoice = [i.strip() for i in ingredient if i.strip() not in choice]
+                ingredientsSet = nonChoice
 
-            recipeDict['picture'] = recipelist[recipe]["picture"]
-            recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
-            recipeDict['url'] = recipelist[recipe]["url"]
+                recipeDict['picture'] = recipelist[recipe]["picture"]
+                recipeDict['ingredients'] = recipelist[recipe]["ingredients"]
+                recipeDict['url'] = recipelist[recipe]["url"]
 
-            recipes.append(recipeDict)
+                recipes.append(recipeDict)
 
-            # check if shown recipes are already in recipe database, if not store them
-            recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
-            if len(recipeDatabase) == 0:
-                db.execute("INSERT INTO recipe (recipe) VALUES(:recipe)", recipe = recipeDict['name'])
+                # check if shown recipes are already in recipe database, if not store them
+                recipeDatabase = db.execute("SELECT * FROM recipe WHERE recipe = :recipe", recipe = recipeDict['name'])
+                if len(recipeDatabase) == 0:
+                    db.execute("INSERT INTO recipe (recipe) VALUES(:recipe)", recipe = recipeDict['name'])
 
-        # store list of recipes in session
-        session['recipes'] = recipes
+            # store list of recipes in session
+            session['recipes'] = recipes
 
-        return render_template("results.html", choice=choice, recipes = recipes, ingredientsSet = ingredientsSet)
+            return render_template("results.html", choice=choice, recipes = recipes, ingredientsSet = ingredientsSet)
 
     # if user reached route via POST (as by submitting a form via POST)
     elif request.referrer and request.referrer.endswith("results") and request.method == "POST":
@@ -291,8 +295,9 @@ def results():
 
             # get new ingredients
             recipelist = getResults(choice)
-            if len(recipelist) == 0:
-                return apology("No recipes found")
+            if len(recipelist) == 0 or len(recipelist) > 20:
+                flash("No recipes found")
+                return redirect(url_for("homepage"))
             else:
                 recipes = []
                 ingredientsSet = set()
