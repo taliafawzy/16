@@ -4,6 +4,9 @@ Jill Reijnders, Gijs van Scheijndel, Miro Schreinemakers & Talia Fawzy
 Gebruikers kunnen via de website zoeken naar recepten met de specifieke ingrediënten die zij aanklikken.De website geeft in eerste instantie alleen de keuze uit verse producten (vlees, zuivel, vis, groente, fruit). Dit is gericht op het tegengaan van voedselverspilling. Als de verse ingrediënten zijn aangeklikt krijgt de gebruiker recepten terug en een lijst met ingrediënten die worden gecombineerd met het gekozen ingrediënt. De lijst aan ingrediënten die de gebruiker terugkrijgt bestaat uit zowel verse als houdbare producten. De gebruiker kan kijken welke ingrediënten hij/zij verder in huis heeft en kan op de ingrediënten in de lijst klikken om recepten terug te krijgen met de gekozen combinatie.
 Het product laat gebruikers hun favoriete recepten opslaan die zij op hun persoonlijke pagina kunnen bekijken. Ze kunnen daar aangeven of ze het recept hebben geprobeerd en ze kunnen het recept eventueel weer verwijderen. Gebruikers worden getipt over andere recepten, doordat zij op de receptpagina krijgen te zien wat gebruikers die het bezochte recept hebben opgeslagen ook hebben opgeslagen.
 
+## Video
+https://drive.google.com/file/d/1cvC-eX3fBQI3QXp4G7nrhNMc-oOLOld-/view?usp=sharing
+
 ## Views
 ![](https://github.com/taliafawzy/16/blob/master/static/homepage.png)
 ### Databases
